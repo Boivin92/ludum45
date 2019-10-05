@@ -1,9 +1,10 @@
-[gd_scene load_steps=6 format=2]
+[gd_scene load_steps=7 format=2]
 
 [ext_resource path="res://Control.gd" type="Script" id=1]
 [ext_resource path="res://MorrisRoman-Black.ttf" type="DynamicFontData" id=2]
-[ext_resource path="res://start.png" type="Texture" id=3]
-[ext_resource path="res://info.png" type="Texture" id=4]
+[ext_resource path="res://gear.png" type="Texture" id=3]
+[ext_resource path="res://GearCouleur.png" type="Texture" id=4]
+[ext_resource path="res://LabelMorris.tscn" type="PackedScene" id=5]
 
 [sub_resource type="DynamicFont" id=1]
 size = 160
@@ -28,7 +29,7 @@ custom_constants/separation = 10
 
 [node name="Title" type="Label" parent="VBoxContainer"]
 margin_right = 1591.0
-margin_bottom = 746.0
+margin_bottom = 777.0
 size_flags_vertical = 3
 custom_fonts/font = SubResource( 1 )
 text = "Titre du jeu"
@@ -37,23 +38,44 @@ valign = 1
 autowrap = true
 
 [node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer"]
-margin_top = 756.0
+margin_top = 787.0
 margin_right = 1591.0
 margin_bottom = 895.0
+custom_constants/separation = 10
 alignment = 1
 
 [node name="StartGame" type="TextureButton" parent="VBoxContainer/HBoxContainer"]
-margin_left = 559.0
-margin_right = 759.0
-margin_bottom = 139.0
-rect_min_size = Vector2( 200, 40 )
-size_flags_vertical = 3
+margin_left = 546.0
+margin_right = 790.0
+margin_bottom = 108.0
+rect_min_size = Vector2( 244, 108 )
 texture_normal = ExtResource( 3 )
+texture_hover = ExtResource( 4 )
 expand = true
 
+[node name="Start" parent="VBoxContainer/HBoxContainer/StartGame" instance=ExtResource( 5 )]
+margin_left = -125.149
+margin_top = -52.6163
+margin_right = 118.851
+margin_bottom = 55.3837
+text = "Start"
+texte = "Start"
+
 [node name="Infos" type="TextureButton" parent="VBoxContainer/HBoxContainer"]
-margin_left = 763.0
-margin_right = 1032.0
-margin_bottom = 139.0
-texture_normal = ExtResource( 4 )
+margin_left = 800.0
+margin_right = 1044.0
+margin_bottom = 108.0
+rect_min_size = Vector2( 244, 108 )
+texture_normal = ExtResource( 3 )
+texture_hover = ExtResource( 4 )
+expand = true
+
+[node name="Infos" parent="VBoxContainer/HBoxContainer/Infos" instance=ExtResource( 5 )]
+margin_left = -125.149
+margin_top = -52.6163
+margin_right = 118.851
+margin_bottom = 55.3837
+text = "Information"
+texte = "Information"
 [connection signal="pressed" from="VBoxContainer/HBoxContainer/StartGame" to="." method="_on_StartGame_pressed"]
+[connection signal="pressed" from="VBoxContainer/HBoxContainer/Infos" to="." method="_on_StartGame_pressed"]
