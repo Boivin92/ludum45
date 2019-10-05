@@ -1,4 +1,4 @@
-[gd_scene load_steps=8 format=2]
+[gd_scene load_steps=7 format=2]
 
 [ext_resource path="res://Scripts/EcranAccueil.gd" type="Script" id=1]
 [ext_resource path="res://Arts/TitleScreenBG.png" type="Texture" id=2]
@@ -6,10 +6,6 @@
 [ext_resource path="res://Arts/BoutonStartHighlight.png" type="Texture" id=4]
 [ext_resource path="res://Arts/BoutonAbout.png" type="Texture" id=5]
 [ext_resource path="res://Arts/BoutonAboutHighlight.png" type="Texture" id=6]
-
-[sub_resource type="StyleBoxTexture" id=1]
-texture = ExtResource( 2 )
-region_rect = Rect2( 0, 0, 1600, 900 )
 
 [node name="Control" type="Control"]
 anchor_right = 1.0
@@ -19,10 +15,10 @@ margin_right = -9.0
 margin_bottom = 16.0
 script = ExtResource( 1 )
 
-[node name="Panel" type="Panel" parent="."]
+[node name="Panel" type="TextureRect" parent="."]
 anchor_right = 1.0
 anchor_bottom = 1.0
-custom_styles/panel = SubResource( 1 )
+texture = ExtResource( 2 )
 
 [node name="StartGame" type="TextureButton" parent="."]
 margin_left = 29.0
