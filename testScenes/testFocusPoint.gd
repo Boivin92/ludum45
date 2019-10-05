@@ -14,13 +14,13 @@ func _process(delta: float) -> void:
 		$AnimationPlayer.play("transition" + str(step))
 
 func start_new_game():
-	emit_signal("transition_completed")
+	$GameScreen/Grid.reset_grid()
 
 func transition_to_next():
 	$AnimationPlayer.play("transition" + str(step))
 
 func _on_AnimationPlayer_animation_finished(anim_name: String) -> void:
-	if step == poems.size():
+	if step <= poems.size():
 		start_new_game()
 		return
 	

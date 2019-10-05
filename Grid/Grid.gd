@@ -67,14 +67,16 @@ func match_gems() -> void:
 	# Signal matches
 	print("Matched %d" % matches)
 	if matches > 1:
-		emit_signal("matched_plus")
+		emit_plus_match()
 	elif matches == 1:
-		emit_signal("matched_basic")
+		emit_regular_match()
 
 	# Update remaining grid contents
 	if matches > 0:
 		yield(get_tree(), "idle_frame")
 		update_grid_contents()
+	else:
+		generating = false
 
 
 func update_grid_contents() -> void:
@@ -148,4 +150,21 @@ func _on_gem_selected(gem) -> void:
 
 func _ready() -> void:
 	randomize()
+	reset_grid()
+
+func reset_grid():
+	generating = true
+	for gem in $GemContainer.get_children():
+		gem.queue_free()
+	yield(get_tree(), "idle_frame")
 	update_grid_contents()
+	
+var generating : bool = true
+
+func emit_regular_match():
+	if not generating:
+		emit_signal("matched_basic")
+
+func emit_plus_match():
+	if not generating:
+		emit_signal("matched_plus")

@@ -56,6 +56,20 @@ tracks/2/keys = {
 "method": "show_step"
 } ]
 }
+tracks/3/type = "method"
+tracks/3/path = NodePath("GameScreen/Grid")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/keys = {
+"times": PoolRealArray( 3 ),
+"transitions": PoolRealArray( 1 ),
+"values": [ {
+"args": [  ],
+"method": "reset_grid"
+} ]
+}
 
 [sub_resource type="Animation" id=2]
 resource_name = "transition2"
@@ -337,6 +351,8 @@ percent_visible = 0.0
 script = ExtResource( 8 )
 
 [node name="Grid" parent="GameScreen" instance=ExtResource( 9 )]
+height = 5
+width = 5
 
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="GameScreen"]
 script = ExtResource( 10 )
