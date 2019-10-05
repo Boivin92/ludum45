@@ -23,5 +23,6 @@ func _on_AnimationPlayer_animation_finished(anim_name: String) -> void:
 	if step == poems.size():
 		start_new_game()
 		return
-	$DialogBox.text = poems[step]
+	
+	$DialogBox.bbcode_text = poems[step]
 	step += 1
