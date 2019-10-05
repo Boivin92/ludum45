@@ -1,0 +1,25 @@
+[gd_scene load_steps=2 format=2]
+
+[ext_resource path="res://textBox/TextBox.gd" type="Script" id=1]
+
+[node name="DialogBox" type="Label"]
+margin_left = -350.0
+margin_top = -75.0
+margin_right = 350.0
+margin_bottom = 75.0
+rect_pivot_offset = Vector2( 350, 75 )
+custom_colors/font_color = Color( 1, 1, 1, 1 )
+text = "LOREM IPSUM DOLOR SIT AMETH!
+Hello yes this is doge"
+align = 1
+valign = 1
+autowrap = true
+script = ExtResource( 1 )
+
+[node name="Tween" type="Tween" parent="."]
+
+[node name="ColorRect" type="ColorRect" parent="."]
+show_behind_parent = true
+anchor_right = 1.0
+anchor_bottom = 1.0
+color = Color( 0, 0, 0, 0.160784 )
