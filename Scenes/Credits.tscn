@@ -5,9 +5,9 @@
 [ext_resource path="res://Arts/luneTxtre.png" type="Texture" id=3]
 [ext_resource path="res://Fonts/MorrisRoman-Black.ttf" type="DynamicFontData" id=4]
 [ext_resource path="res://Scenes/Label.gd" type="Script" id=5]
-[ext_resource path="res://Arts/TitleScreenBG.png" type="Texture" id=6]
+[ext_resource path="res://Arts/BackButton.png" type="Texture" id=6]
 
-[sub_resource type="GDScript" id=4]
+[sub_resource type="GDScript" id=1]
 script/source = "extends Node2D
 
 var skills = [\"Programming\", \"Art works\",\"Scenario\", \"Feeding\"]
@@ -100,7 +100,7 @@ __meta__ = {
 
 [node name="Credits" type="Node2D" parent="ScrollCredits"]
 position = Vector2( -990.145, 900 )
-script = SubResource( 4 )
+script = SubResource( 1 )
 
 [node name="Label" type="Label" parent="ScrollCredits/Credits"]
 modulate = Color( 1, 1, 1, 0.442408 )
@@ -124,10 +124,10 @@ autoplay = "fade"
 anims/fade = SubResource( 3 )
 
 [node name="RetourAccueil" type="TextureButton" parent="."]
-margin_left = 25.0975
-margin_top = 760.82
-margin_right = 269.098
-margin_bottom = 876.82
+margin_left = 1311.44
+margin_top = 695.361
+margin_right = 1591.44
+margin_bottom = 956.361
 rect_min_size = Vector2( 244, 108 )
 texture_normal = ExtResource( 6 )
 expand = true
