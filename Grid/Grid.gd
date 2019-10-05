@@ -105,6 +105,7 @@ func update_grid_contents(match_info: MatchInfo) -> void:
 	$Tween.start()
 	yield($Tween, "tween_all_completed")
 	match_info.cascade += 1
+	match_info.count = 0
 	match_gems(match_info)
 	actions_locked = false
 
