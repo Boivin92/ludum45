@@ -1,23 +1,28 @@
-[gd_scene load_steps=10 format=2]
+[gd_scene load_steps=12 format=2]
 
 [ext_resource path="res://Scripts/Credits.gd" type="Script" id=1]
-[ext_resource path="res://Arts/luneTxtre.png" type="Texture" id=2]
-[ext_resource path="res://Fonts/MorrisRoman-Black.ttf" type="DynamicFontData" id=3]
-[ext_resource path="res://Arts/gear.png" type="Texture" id=4]
-[ext_resource path="res://Arts/GearCouleur.png" type="Texture" id=5]
-[ext_resource path="res://Scenes/LabelMorris.tscn" type="PackedScene" id=6]
+[ext_resource path="res://Arts/luneAqua.png" type="Texture" id=2]
+[ext_resource path="res://Arts/luneTxtre.png" type="Texture" id=3]
+[ext_resource path="res://Fonts/MorrisRoman-Black.ttf" type="DynamicFontData" id=4]
+[ext_resource path="res://Arts/gear.png" type="Texture" id=5]
+[ext_resource path="res://Arts/GearCouleur.png" type="Texture" id=6]
+[ext_resource path="res://Scenes/LabelMorris.tscn" type="PackedScene" id=7]
+
+[sub_resource type="StyleBoxTexture" id=4]
+texture = ExtResource( 2 )
+region_rect = Rect2( 0, 0, 160, 216 )
 
 [sub_resource type="StyleBoxTexture" id=1]
-texture = ExtResource( 2 )
+texture = ExtResource( 3 )
 region_rect = Rect2( 0, 0, 150, 94 )
 modulate_color = Color( 1, 1, 1, 0.392157 )
 
-[sub_resource type="DynamicFont" id=3]
-font_data = ExtResource( 3 )
-
 [sub_resource type="DynamicFont" id=2]
+font_data = ExtResource( 4 )
+
+[sub_resource type="DynamicFont" id=3]
 size = 50
-font_data = ExtResource( 3 )
+font_data = ExtResource( 4 )
 
 [node name="Credits" type="Node2D"]
 position = Vector2( 0, -9.08829 )
@@ -27,20 +32,34 @@ script = ExtResource( 1 )
 anchor_right = 1.0
 anchor_bottom = 1.0
 
-[node name="Panel" type="Panel" parent="VBoxContainer"]
-margin_right = 1600.0
+[node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer"]
+margin_right = 2604.0
 margin_bottom = 800.0
-rect_min_size = Vector2( 1600, 800 )
+
+[node name="ScrollStory" type="Panel" parent="VBoxContainer/HBoxContainer"]
+margin_right = 1000.0
+margin_bottom = 800.0
+rect_min_size = Vector2( 1000, 0 )
+size_flags_vertical = 3
+custom_styles/panel = SubResource( 4 )
+
+[node name="ScrollCredits" type="Panel" parent="VBoxContainer/HBoxContainer"]
+margin_left = 1004.0
+margin_right = 1604.0
+margin_bottom = 800.0
+rect_min_size = Vector2( 600, 800 )
 size_flags_vertical = 3
 custom_styles/panel = SubResource( 1 )
-__meta__ = {
-"_edit_lock_": true
-}
 
-[node name="Label" type="Label" parent="VBoxContainer/Panel"]
+[node name="Label" type="Label" parent="VBoxContainer/HBoxContainer/ScrollCredits"]
+anchor_left = 1.0
 anchor_right = 1.0
 anchor_bottom = 1.0
-custom_fonts/font = SubResource( 3 )
+margin_left = -600.205
+margin_top = 4.54419
+margin_right = 81.7946
+margin_bottom = 4.54419
+custom_fonts/font = SubResource( 2 )
 text = "Lorem Ipsum
 \"Neque porro quisquam est qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit...\"
 \"Il ny a personne qui naime la souffrance pour elle-même, qui ne la recherche et qui ne la veuille pour elle-même...\"
@@ -66,21 +85,21 @@ Nunc nec turpis semper, tincidunt quam non, auctor est.
 Pellentesque mollis dolor eu enim malesuada, eget vulputate diam tempor.
 Integer porttitor velit tristique nisi placerat iaculis.
 Ut vitae neque et velit luctus consectetur."
+autowrap = true
 
 [node name="RetourAccueil" type="TextureButton" parent="VBoxContainer"]
 margin_top = 804.0
-margin_right = 1600.0
+margin_right = 2604.0
 margin_bottom = 912.0
 rect_min_size = Vector2( 244, 108 )
-texture_normal = ExtResource( 4 )
-texture_hover = ExtResource( 5 )
+texture_normal = ExtResource( 5 )
+texture_hover = ExtResource( 6 )
 
-[node name="Retour" parent="VBoxContainer/RetourAccueil" instance=ExtResource( 6 )]
-margin_left = -122.0
+[node name="Retour" parent="VBoxContainer/RetourAccueil" instance=ExtResource( 7 )]
 margin_top = -54.0
-margin_right = 122.0
+margin_right = -556.0
 margin_bottom = 54.0
-custom_fonts/font = SubResource( 2 )
+custom_fonts/font = SubResource( 3 )
 text = "Retour"
 texte = "Retour"
 [connection signal="pressed" from="VBoxContainer/RetourAccueil" to="." method="_on_RetourAccueil_pressed"]
