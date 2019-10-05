@@ -1,7 +1,7 @@
 extends Node2D
 
-export(int, 3, 12) var height = 3
-export(int, 3, 12) var width = 3
+export(int, 3, 12) var height := 3
+export(int, 3, 12) var width := 3
 
 signal matched_basic
 signal matched_plus
@@ -9,6 +9,7 @@ signal level_completed
 
 const Gem = preload("res://Grid/Gem/Gem.tscn")
 enum Matches { Horizontal = 1, Vertical = 2}
+enum FallTypes { Regular, Spawn }
 const GemTextures = [
 		preload("res://Grid/Gem/Feather.tres"),
 		preload("res://Grid/Gem/Flower.tres"),
@@ -87,31 +88,44 @@ func match_gems() -> void:
 
 
 func update_grid_contents() -> void:
-	for x in range(width):
-		for y in range(height - 1, -1, -1):
-			var gem = find_gem( Vector2(x, y) )
-			if gem != null:
-				continue
-			var above = null
-			for y2 in range(y-1, -1, -1):
-				above = find_gem( Vector2(x, y2) )
-				if above != null:
-					break
-			if above != null:
-				above.coords = Vector2(x, y)
-			else:
-				spawn_gem( Vector2(x, y) )
+	var gems = get_children()
+	gems.sort_custom(self, "sort_update_order")
+	var column := 0
+	var fall_distance := 0
+	var expected_y := height - 1
+	for gem in gems:
+		if gem.coords.x != column:
+			spawn_gems(column, fall_distance)
+			column = gem.coords.x
+			fall_distance = 0
+			expected_y = height - 1
+		fall_distance += expected_y - gem.coords.y
+		expected_y = gem.coords.y - 1
+		gem.set_fall(fall_distance, FallTypes.Regular)
+	spawn_gems(column, fall_distance)
+
+	for gem in get_children():
+		gem.start_fall()
 
 
-func spawn_gem( coords: Vector2) -> void:
-	var gem = Gem.instance()
-	gem_count += 1
-	gem.set_name("Gem%d" % gem_count)
-	gem.type = floor(rand_range(0, 5))
-	gem.texture = GemTextures[gem.type]
-	gem.coords = coords
-	gem.connect("gem_selected", self, "_on_gem_selected")
-	add_child(gem)
+func sort_update_order(gem1, gem2) -> bool:
+	if gem1.coords.x == gem2.coords.x:
+		return gem1.coords.y > gem2.coords.y
+	return gem1.coords.x < gem2.coords.x
+
+
+func spawn_gems(column: int, fall_distance: int) -> void:
+	for y in range(-1, -1 - fall_distance, -1):
+		var gem = Gem.instance()
+		gem_count += 1
+		gem.set_name("Gem%d" % gem_count)
+		gem.type = floor(rand_range(0, 5))
+		gem.texture = GemTextures[gem.type]
+		gem.coords = Vector2(column, y)
+		gem.connect("gem_selected", self, "_on_gem_selected")
+		gem.set_fall(fall_distance, FallTypes.Spawn)
+		add_child(gem)
+
 
 func _on_gem_selected(gem) -> void:
 	if actions_locked:

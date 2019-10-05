@@ -9,6 +9,7 @@ enum Types { Feather, Flower, Hourglass, Book, Gear }
 export(Types) var type
 
 enum Matches { Horizontal = 1, Vertical = 2}
+enum FallTypes { Regular, Spawn }
 
 signal gem_selected(gem)
 
@@ -48,10 +49,28 @@ func check_matches() -> int:
 
 func move_to(new_coords: Vector2) -> Node:
 	$Offset/Tween.interpolate_property(self, "coords",
-			get_coords(), new_coords, 0.5, Tween.TRANS_LINEAR, Tween.EASE_IN_OUT)
+			get_coords(), new_coords, 0.5,
+			Tween.TRANS_LINEAR, Tween.EASE_IN_OUT)
 	$Offset/Tween.start()
 	return $Offset/Tween
 
+
+func set_fall(distance: int, fall_type: int) -> void:
+	if distance == 0:
+		return
+	var old_coords := get_coords()
+	var new_coords := old_coords + distance * Vector2(0, 1)
+	$Offset/Tween.interpolate_property(self, "coords",
+			old_coords, new_coords, 0.6,
+			Tween.TRANS_QUAD, Tween.EASE_IN_OUT)
+	if fall_type == FallTypes.Spawn:
+		$Offset/Tween.interpolate_property(self, "modulate",
+				Color(1, 1, 1, 0), Color(1, 1, 1, 1), 0.6,
+				Tween.TRANS_LINEAR, Tween.EASE_IN_OUT)
+
+
+func start_fall() -> void:
+	$Offset/Tween.start()
 
 func _gui_input(event: InputEvent) -> void:
 	if event.is_action_released("ui_select"):
