@@ -13,13 +13,8 @@ func _ready():
 	for sprite in steps:
 		sprite.self_modulate = NOT_VISIBLE
 	
-func _process(delta: float) -> void:
-	if Input.is_action_just_pressed("ui_accept"):
-		show_current_step()
-
 func get_next_step_position():
-	current_step += 1
-	if steps.size() >= current_step:
+	if current_step >= steps.size():
 		emit_signal("ended")
 		return
 	return steps[current_step].global_position
@@ -33,3 +28,4 @@ func show_step(step : Sprite):
 
 func _on_Tween_tween_all_completed() -> void:
 	$Tween.remove_all()
+	current_step += 1
