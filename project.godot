@@ -21,8 +21,8 @@ _global_script_class_icons={
 [application]
 
 config/name="ludum45"
-run/main_scene="res://EcranAccueil.tscn"
-config/icon="res://icon.png"
+run/main_scene="res://Scenes/EcranAccueil.tscn"
+config/icon="res://Arts/icon.png"
 
 [display]
 

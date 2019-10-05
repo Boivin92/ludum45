@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/GearCouleur.png-1a4d28dd1328428ec49e8466f08fe1c9.stex"
+path="res://.import/GearCouleur.png-21e2391fd1c7190f8e37c84ce84f96e6.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://GearCouleur.png"
-dest_files=[ "res://.import/GearCouleur.png-1a4d28dd1328428ec49e8466f08fe1c9.stex" ]
+source_file="res://Arts/GearCouleur.png"
+dest_files=[ "res://.import/GearCouleur.png-21e2391fd1c7190f8e37c84ce84f96e6.stex" ]
 
 [params]
 

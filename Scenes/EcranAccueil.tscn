@@ -1,10 +1,11 @@
 [gd_scene load_steps=7 format=2]
 
-[ext_resource path="res://Control.gd" type="Script" id=1]
-[ext_resource path="res://MorrisRoman-Black.ttf" type="DynamicFontData" id=2]
-[ext_resource path="res://gear.png" type="Texture" id=3]
-[ext_resource path="res://GearCouleur.png" type="Texture" id=4]
-[ext_resource path="res://LabelMorris.tscn" type="PackedScene" id=5]
+[ext_resource path="res://Scripts/Control.gd" type="Script" id=1]
+[ext_resource path="res://Fonts/MorrisRoman-Black.ttf" type="DynamicFontData" id=2]
+[ext_resource path="res://Arts/gear.png" type="Texture" id=3]
+[ext_resource path="res://Arts/GearCouleur.png" type="Texture" id=4]
+[ext_resource path="res://Scenes/LabelMorris.tscn" type="PackedScene" id=5]
+
 
 [sub_resource type="DynamicFont" id=1]
 size = 160
