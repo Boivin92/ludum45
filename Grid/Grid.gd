@@ -52,32 +52,20 @@ func try_swap(gem1, gem2) -> void:
 
 
 func match_gems() -> void:
-	# Collect match information
-	var matches = []
+	# Check for matched gems
+	var matches := 0
 	for gem in get_children():
-		var match_info = gem.check_matches()
-		if match_info != 0:
-			matches.push_back([gem.coords, match_info])
-	if matches.empty():
-		return
+		if gem.check_matches():
+			matches += 1
 
 	# Remove matched gems
-	for m in matches:
-		var coords = [ m[0] ]
-		if m[1] & Matches.Vertical:
-			coords.push_back( m[0] - Vector2(0, 1) )
-			coords.push_back( m[0] + Vector2(0, 1) )
-		if m[1] & Matches.Horizontal:
-			coords.push_back( m[0] - Vector2(1, 0) )
-			coords.push_back( m[0] + Vector2(1, 0) )
-		for c in coords:
-			var gem = find_gem(c)
-			if gem != null:
-				gem.queue_free()
+	for gem in get_children():
+		if gem.to_remove:
+			gem.queue_free()
 
 	# Signal matches
-	print("Matched %d" % matches.size())
-	if matches.size() > 1:
+	print("Matched %d" % matches)
+	if matches > 1:
 		emit_signal("matched_plus")
 	else:
 		emit_signal("matched_basic")
@@ -92,7 +80,6 @@ func update_grid_contents() -> void:
 	var gems = get_children()
 	gems.sort_custom(self, "sort_update_order")
 	var column := 0
-	var fall_distance := 0
 	var gem_count := 0
 	var expected_y := height - 1
 
@@ -106,13 +93,11 @@ func update_grid_contents() -> void:
 				spawn_gems(col, height)
 			# Reset fall logic data for new column
 			column = gem.coords.x
-			fall_distance = 0
 			gem_count = 0
 			expected_y = height - 1
-		fall_distance += expected_y - gem.coords.y
 		gem_count += 1
 		expected_y = gem.coords.y - 1
-		gem.set_fall(fall_distance, FallTypes.Regular)
+		gem.set_fall(height - gem_count - gem.coords.y, FallTypes.Regular)
 
 	# Repeat spawn logic for empty last column(s)
 	spawn_gems(column, height - gem_count)
