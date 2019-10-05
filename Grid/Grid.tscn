@@ -2,12 +2,14 @@
 
 [ext_resource path="res://Grid/Grid.gd" type="Script" id=1]
 [ext_resource path="res://Grid/Gem/Gem.tscn" type="PackedScene" id=2]
-[ext_resource path="res://Grid/Gem/Shape1.tres" type="Texture" id=3]
-[ext_resource path="res://Grid/Gem/Shape2.tres" type="Texture" id=4]
-[ext_resource path="res://Grid/Gem/Shape3.tres" type="Texture" id=5]
+[ext_resource path="res://Grid/Gem/Feather.tres" type="Texture" id=3]
+[ext_resource path="res://Grid/Gem/Flower.tres" type="Texture" id=4]
+[ext_resource path="res://Grid/Gem/Hourglass.tres" type="Texture" id=5]
 
 [node name="Grid" type="Node2D"]
 script = ExtResource( 1 )
+height = 4
+width = 4
 
 [node name="Gem1" parent="." instance=ExtResource( 2 )]
 margin_right = 128.0

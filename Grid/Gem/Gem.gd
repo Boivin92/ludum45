@@ -2,9 +2,10 @@ tool
 
 extends TextureRect
 
+#warning-ignore:unused_class_variable
 export(Vector2) var coords setget set_coords, get_coords
 
-enum Types { Ruby, Sapphire, Emerald }
+enum Types { Feather, Flower, Hourglass, Book, Gear }
 export(Types) var type
 
 enum Matches { Horizontal = 1, Vertical = 2}
@@ -45,10 +46,13 @@ func check_matches() -> int:
 	return matches
 
 
+func move_to(new_coords: Vector2) -> Node:
+	$Offset/Tween.interpolate_property(self, "coords",
+			get_coords(), new_coords, 0.5, Tween.TRANS_LINEAR, Tween.EASE_IN_OUT)
+	$Offset/Tween.start()
+	return $Offset/Tween
+
+
 func _gui_input(event: InputEvent) -> void:
 	if event.is_action_released("ui_select"):
 		emit_signal("gem_selected", self)
-
-
-#func _ready() -> void:
-#	$Offset/Area2D/RayCastUp.add_exception(self)
