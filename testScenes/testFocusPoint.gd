@@ -20,5 +20,8 @@ func transition_to_next():
 	$AnimationPlayer.play("transition" + str(step))
 
 func _on_AnimationPlayer_animation_finished(anim_name: String) -> void:
+	if step == poems.size():
+		start_new_game()
+		return
 	$DialogBox.text = poems[step]
 	step += 1

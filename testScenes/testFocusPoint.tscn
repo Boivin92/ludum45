@@ -1,11 +1,12 @@
-[gd_scene load_steps=10 format=2]
+[gd_scene load_steps=11 format=2]
 
 [ext_resource path="res://testScenes/testFocusPoint.gd" type="Script" id=1]
 [ext_resource path="res://tapisserie/Tapisserie.tscn" type="PackedScene" id=2]
 [ext_resource path="res://tapisserie/FocusPoint.tscn" type="PackedScene" id=3]
 [ext_resource path="res://testScenes/border.png" type="Texture" id=4]
 [ext_resource path="res://textBox/TextBox.tscn" type="PackedScene" id=5]
-[ext_resource path="res://Grid/Grid.tscn" type="PackedScene" id=6]
+[ext_resource path="res://testScenes/GameScreen.gd" type="Script" id=6]
+[ext_resource path="res://Grid/Grid.tscn" type="PackedScene" id=7]
 
 [sub_resource type="Animation" id=1]
 resource_name = "transition1"
@@ -278,8 +279,9 @@ text = ""
 percent_visible = 0.0
 
 [node name="GameScreen" type="Node2D" parent="."]
+script = ExtResource( 6 )
 
-[node name="Grid" parent="GameScreen" instance=ExtResource( 6 )]
-position = Vector2( -192.476, -192.476 )
+[node name="Grid" parent="GameScreen" instance=ExtResource( 7 )]
 [connection signal="moved" from="FocusPoint" to="." method="_on_FocusPoint_moved"]
 [connection signal="animation_finished" from="AnimationPlayer" to="." method="_on_AnimationPlayer_animation_finished"]
+[connection signal="matched_plus" from="GameScreen/Grid" to="." method="transition_to_next"]
