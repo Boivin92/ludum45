@@ -1,10 +1,11 @@
-[gd_scene load_steps=6 format=2]
+[gd_scene load_steps=7 format=2]
 
 [ext_resource path="res://tapisserie/Tapisserie.gd" type="Script" id=1]
 [ext_resource path="res://Arts/void (1).png" type="Texture" id=2]
 [ext_resource path="res://Arts/Memory.png" type="Texture" id=3]
 [ext_resource path="res://Arts/Rocket.png" type="Texture" id=4]
-[ext_resource path="res://testScenes/carre_700.png" type="Texture" id=5]
+[ext_resource path="res://Arts/tothemoon4.png" type="Texture" id=5]
+[ext_resource path="res://testScenes/carre_700.png" type="Texture" id=6]
 
 [node name="Tapisserie" type="Node2D"]
 position = Vector2( 0, -1 )
@@ -30,15 +31,15 @@ texture = ExtResource( 5 )
 
 [node name="Sprite5" type="Sprite" parent="fragments"]
 position = Vector2( 2800, -1 )
-texture = ExtResource( 5 )
+texture = ExtResource( 6 )
 
 [node name="Sprite6" type="Sprite" parent="fragments"]
 position = Vector2( 3500, -1 )
-texture = ExtResource( 5 )
+texture = ExtResource( 6 )
 
 [node name="Sprite7" type="Sprite" parent="fragments"]
 position = Vector2( 4200, -1 )
-texture = ExtResource( 5 )
+texture = ExtResource( 6 )
 
 [node name="Tween" type="Tween" parent="."]
 [connection signal="tween_all_completed" from="Tween" to="." method="_on_Tween_tween_all_completed"]

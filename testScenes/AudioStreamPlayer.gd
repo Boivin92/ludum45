@@ -13,3 +13,9 @@ func play_match():
 func play_success():
 	stream = success
 	play()
+
+func _on_Grid_matched(match_info) -> void:
+	if match_info.count == 1:
+		play_match()
+	else:
+		play_success()
