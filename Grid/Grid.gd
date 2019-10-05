@@ -67,7 +67,7 @@ func match_gems() -> void:
 	print("Matched %d" % matches)
 	if matches > 1:
 		emit_signal("matched_plus")
-	else:
+	elif matches == 1:
 		emit_signal("matched_basic")
 
 	# Update remaining grid contents

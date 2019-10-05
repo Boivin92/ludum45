@@ -28,6 +28,7 @@ func set_highlight(highlighted: bool) -> void:
 
 
 func check_matches() -> bool:
+	var is_match_center := false
 	var neighbour_up = $Offset/Area2D/RayCastUp.get_collider()
 	var neighbour_down = $Offset/Area2D/RayCastDown.get_collider()
 	if neighbour_up != null and neighbour_down != null:
@@ -35,6 +36,7 @@ func check_matches() -> bool:
 		var gem_down = neighbour_down.find_parent("Gem*")
 		if gem_up.type == self.type and gem_down.type == self.type:
 			to_remove = true
+			is_match_center = true
 			gem_up.to_remove = true
 			gem_down.to_remove = true
 
@@ -45,10 +47,11 @@ func check_matches() -> bool:
 		var gem_right = neighbour_right.find_parent("Gem*")
 		if gem_left.type == self.type and gem_right.type == self.type:
 			to_remove = true
+			is_match_center = true
 			gem_left.to_remove = true
 			gem_right.to_remove = true
 
-	return to_remove
+	return is_match_center
 
 
 func move_to(new_coords: Vector2) -> Node:
