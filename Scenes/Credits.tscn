@@ -1,106 +1,134 @@
-[gd_scene load_steps=11 format=2]
+[gd_scene load_steps=10 format=2]
 
 [ext_resource path="res://Scripts/Credits.gd" type="Script" id=1]
-[ext_resource path="res://Arts/luneTxtre.png" type="Texture" id=2]
-[ext_resource path="res://Scenes/ScrollCredits.gd" type="Script" id=3]
+[ext_resource path="res://Arts/luneAqua.png" type="Texture" id=2]
+[ext_resource path="res://Arts/luneTxtre.png" type="Texture" id=3]
 [ext_resource path="res://Fonts/MorrisRoman-Black.ttf" type="DynamicFontData" id=4]
-[ext_resource path="res://Arts/luneAqua.png" type="Texture" id=5]
-[ext_resource path="res://Scenes/LabelMorris.tscn" type="PackedScene" id=6]
+[ext_resource path="res://Scenes/Label.gd" type="Script" id=5]
+[ext_resource path="res://Arts/BackButton.png" type="Texture" id=6]
 
-[sub_resource type="StyleBoxTexture" id=1]
-texture = ExtResource( 2 )
-region_rect = Rect2( 0, 0, 150, 94 )
-modulate_color = Color( 1, 1, 1, 0.392157 )
+[sub_resource type="GDScript" id=1]
+script/source = "extends Node2D
+
+var skills = [\"Programming\", \"Art works\",\"Scenario\", \"Feeding\"]
+var names = [\"François Boivin\", \"Ariane Simard-Leduc\", \"Marie-Pierre Bergeron\", \"Olivier Boily\", \"Cédric Pinard\", \"Mélanie Ellias\"]
+var counter = 0
+
+func _ready() -> void:
+	pass
+	
+func next_credits():
+	if (counter < names.size()):
+		$Label.text = names[counter]
+		counter += 1
+	else:
+		counter = 0
+	
+"
 
 [sub_resource type="DynamicFont" id=2]
+size = 30
 font_data = ExtResource( 4 )
 
-[sub_resource type="StyleBoxTexture" id=4]
-texture = ExtResource( 5 )
-region_rect = Rect2( 0, 0, 160, 216 )
-
-[sub_resource type="DynamicFont" id=3]
-size = 50
-font_data = ExtResource( 4 )
+[sub_resource type="Animation" id=3]
+resource_name = "fade"
+length = 3.0
+loop = true
+tracks/0/type = "value"
+tracks/0/path = NodePath("Label:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 3 ),
+"transitions": PoolRealArray( 1, -2 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 0 ), Color( 1, 1, 1, 1 ) ]
+}
+tracks/1/type = "method"
+tracks/1/path = NodePath("Label")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"values": [ {
+"args": [  ],
+"method": "next_credits"
+} ]
+}
 
 [node name="Credits" type="Node"]
 script = ExtResource( 1 )
 
 [node name="HBoxContainer" type="HBoxContainer" parent="."]
-margin_right = 3204.0
-margin_bottom = 800.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 2.51758
+margin_top = -2.51752
+margin_right = 2.51758
+margin_bottom = -2.51752
 
-[node name="Node2D" type="Node2D" parent="HBoxContainer"]
+[node name="Tapisserie" type="Node2D" parent="HBoxContainer"]
+__meta__ = {
+"_edit_lock_": true
+}
 
-[node name="ScrollCredits" type="Panel" parent="HBoxContainer/Node2D"]
-margin_right = 600.0
-margin_bottom = 800.0
+[node name="ScrollStory" type="TextureRect" parent="HBoxContainer/Tapisserie"]
+margin_left = -4.16132
+margin_top = 7.05548
+margin_right = 995.839
+margin_bottom = 907.055
+rect_min_size = Vector2( 1000, 0 )
+texture = ExtResource( 2 )
+expand = true
+
+[node name="ScrollCredits" type="TextureRect" parent="."]
+margin_left = 994.928
+margin_right = 1594.93
+margin_bottom = 900.0
 rect_min_size = Vector2( 600, 800 )
 size_flags_vertical = 3
-custom_styles/panel = SubResource( 1 )
-script = ExtResource( 3 )
+texture = ExtResource( 3 )
+expand = true
+__meta__ = {
+"_edit_lock_": true
+}
 
-[node name="Label" type="Label" parent="HBoxContainer/Node2D/ScrollCredits"]
+[node name="Credits" type="Node2D" parent="ScrollCredits"]
+position = Vector2( -990.145, 900 )
+script = SubResource( 1 )
+
+[node name="Label" type="Label" parent="ScrollCredits/Credits"]
+modulate = Color( 1, 1, 1, 0.442408 )
 anchor_left = 1.0
 anchor_right = 1.0
 anchor_bottom = 1.0
-margin_left = -600.205
-margin_top = 4.54419
-margin_right = 81.7946
-margin_bottom = 4.54419
+margin_left = 993.162
+margin_top = -901.452
+margin_right = 1587.16
+margin_bottom = -22.4515
 custom_fonts/font = SubResource( 2 )
-text = "Lorem Ipsum
-\"Neque porro quisquam est qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit...\"
-\"Il ny a personne qui naime la souffrance pour elle-même, qui ne la recherche et qui ne la veuille pour elle-même...\"
-
-
-Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-Sed dapibus arcu eget dui porttitor, id venenatis ligula aliquam.
-Aenean ornare ipsum et orci rhoncus, vitae maximus elit vestibulum.
-Suspendisse pretium odio ac magna volutpat commodo.
-Nunc viverra risus non finibus lacinia.
-Quisque hendrerit neque eget malesuada dignissim.
-Curabitur finibus ligula vel fringilla auctor.
-Phasellus fermentum elit sit amet venenatis laoreet.
-Cras nec risus at nunc faucibus viverra.
-Donec venenatis metus ut massa tincidunt, congue venenatis tellus molestie.
-Fusce et metus quis lorem auctor semper.
-Nulla nec lorem mollis, consectetur enim in, iaculis turpis.
-Maecenas vitae erat at ligula posuere malesuada.
-Sed sit amet felis viverra, ullamcorper libero at, egestas nisl.
-Morbi lacinia purus nec dolor maximus tincidunt.
-Maecenas vitae augue maximus, eleifend libero id, pretium nunc.
-Nunc nec turpis semper, tincidunt quam non, auctor est.
-Pellentesque mollis dolor eu enim malesuada, eget vulputate diam tempor.
-Integer porttitor velit tristique nisi placerat iaculis.
-Ut vitae neque et velit luctus consectetur."
+custom_colors/font_outline_modulate = Color( 0, 0, 0, 0 )
+text = "HI! jhsgffggtttfd"
+align = 1
+valign = 1
 autowrap = true
+script = ExtResource( 5 )
 
-[node name="Node2D2" type="Node2D" parent="HBoxContainer"]
+[node name="AnimationPlayer" type="AnimationPlayer" parent="ScrollCredits/Credits"]
+autoplay = "fade"
+anims/fade = SubResource( 3 )
 
-[node name="ScrollStory" type="Panel" parent="HBoxContainer/Node2D2"]
-margin_right = 1000.0
-margin_bottom = 800.0
-rect_min_size = Vector2( 1000, 0 )
-size_flags_vertical = 3
-custom_styles/panel = SubResource( 4 )
-
-[node name="VBoxContainer" type="VBoxContainer" parent="."]
-anchor_right = 1.0
-anchor_bottom = 1.0
-margin_right = 1604.0
-margin_bottom = 912.0
-
-[node name="RetourAccueil" type="TextureButton" parent="VBoxContainer"]
-margin_right = 3204.0
-margin_bottom = 115.0
+[node name="RetourAccueil" type="TextureButton" parent="."]
+margin_left = 1311.44
+margin_top = 695.361
+margin_right = 1591.44
+margin_bottom = 956.361
 rect_min_size = Vector2( 244, 108 )
-
-[node name="Retour" parent="VBoxContainer/RetourAccueil" instance=ExtResource( 6 )]
-margin_top = -54.0
-margin_right = -556.0
-margin_bottom = 54.0
-custom_fonts/font = SubResource( 3 )
-text = "Retour"
-texte = "Retour"
-[connection signal="pressed" from="VBoxContainer/RetourAccueil" to="." method="_on_RetourAccueil_pressed"]
+texture_normal = ExtResource( 6 )
+expand = true
+[connection signal="pressed" from="RetourAccueil" to="." method="_on_RetourAccueil_pressed"]
