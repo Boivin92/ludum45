@@ -3,17 +3,24 @@ extends Node2D
 export(int, 3, 12) var height = 3
 export(int, 3, 12) var width = 3
 
+signal matched_basic
+signal matched_plus
+signal level_completed
+
 const Gem = preload("res://Grid/Gem/Gem.tscn")
 enum Matches { Horizontal = 1, Vertical = 2}
-
 const GemTextures = [
-		preload("res://Grid/Gem/Shape1.tres"),
-		preload("res://Grid/Gem/Shape2.tres"),
-		preload("res://Grid/Gem/Shape3.tres")
+		preload("res://Grid/Gem/Feather.tres"),
+		preload("res://Grid/Gem/Flower.tres"),
+		preload("res://Grid/Gem/Hourglass.tres"),
+		preload("res://Grid/Gem/Book.tres"),
+		preload("res://Grid/Gem/Gear.tres")
 	]
 
 var selected = null
-var gem_count = 9
+var gem_count := 9
+var actions_locked := false
+
 
 func find_gem(coord: Vector2):
 	for gem in get_children():
@@ -31,12 +38,15 @@ func can_swap(coord1: Vector2, coord2: Vector2) -> bool:
 
 
 func try_swap(gem1, gem2) -> void:
-	if not can_swap(gem1.coords, gem2.coords):
+	var coords1 = gem1.coords
+	var coords2 = gem2.coords
+	if not can_swap(coords1, coords2):
 		return
-	var temp = gem1.coords
-	gem1.coords = gem2.coords
-	gem2.coords = temp
-	yield(get_tree(), "idle_frame")
+	var tween = gem1.move_to(coords2)
+	gem2.move_to(coords1)
+	actions_locked = true
+	yield(tween, "tween_completed")
+	actions_locked = false
 	match_gems()
 
 
@@ -64,6 +74,13 @@ func match_gems() -> void:
 			if gem != null:
 				gem.queue_free()
 
+	# Signal matches
+	print("Matched %d" % matches.size())
+	if matches.size() > 1:
+		emit_signal("matched_plus")
+	else:
+		emit_signal("matched_basic")
+
 	# Update remaining grid contents
 	yield(get_tree(), "idle_frame")
 	update_grid_contents()
@@ -76,7 +93,7 @@ func update_grid_contents() -> void:
 			if gem != null:
 				continue
 			var above = null
-			for y2 in range(y-1, 0, -1):
+			for y2 in range(y-1, -1, -1):
 				above = find_gem( Vector2(x, y2) )
 				if above != null:
 					break
@@ -90,13 +107,15 @@ func spawn_gem( coords: Vector2) -> void:
 	var gem = Gem.instance()
 	gem_count += 1
 	gem.set_name("Gem%d" % gem_count)
-	gem.type = floor(rand_range(0, 3))
+	gem.type = floor(rand_range(0, 5))
 	gem.texture = GemTextures[gem.type]
 	gem.coords = coords
 	gem.connect("gem_selected", self, "_on_gem_selected")
 	add_child(gem)
 
 func _on_gem_selected(gem) -> void:
+	if actions_locked:
+		return
 	gem.set_highlight(selected == null)
 	if selected == null:
 		gem.set_highlight(true)
@@ -109,3 +128,4 @@ func _on_gem_selected(gem) -> void:
 
 func _ready() -> void:
 	randomize()
+	update_grid_contents()
