@@ -3,8 +3,7 @@ extends Node2D
 export(int, 3, 12) var height := 3
 export(int, 3, 12) var width := 3
 
-signal matched_basic
-signal matched_plus
+signal matched(match_info)
 signal level_completed
 
 const Gem = preload("res://Grid/Gem/Gem.tscn")
@@ -21,6 +20,7 @@ const GemTextures = [
 var selected = null
 var gem_count := 9
 var actions_locked := false
+var silent := false
 
 
 func find_gem(coord: Vector2):
@@ -49,43 +49,37 @@ func try_swap(gem1, gem2) -> void:
 	$Tween.start()
 	yield($Tween, "tween_all_completed")
 	actions_locked = false
-	match_gems()
+	match_gems(MatchInfo.new())
 
 
-func match_gems() -> void:
+func match_gems(match_info: MatchInfo) -> void:
 	# Check for matched gems
-	var matches := 0
 	for gem in $GemContainer.get_children():
 		if gem.check_matches():
-			matches += 1
+			match_info.count += 1
 
 	# Remove matched gems
 	for gem in $GemContainer.get_children():
 		if gem.to_remove:
 			gem.queue_free()
 
-	# Signal matches
-	print("Matched %d" % matches)
-	if matches > 1:
-		emit_plus_match()
-	elif matches == 1:
-		emit_regular_match()
-
 	# Update remaining grid contents
-	if matches > 0:
+	if match_info.count > 0:
+		if not silent:
+			emit_signal("matched", match_info)
 		yield(get_tree(), "idle_frame")
-		update_grid_contents()
+		update_grid_contents(match_info)
 	else:
-		generating = false
+		# Has to be here because of all the yield()-ing
+		silent = false
 
 
-func update_grid_contents() -> void:
+func update_grid_contents(match_info: MatchInfo) -> void:
 	# Init update logic variables
 	var gems = $GemContainer.get_children()
 	gems.sort_custom(self, "sort_update_order")
 	var column := 0
 	var gem_count := 0
-	var expected_y := height - 1
 
 	# General algorithm
 	for gem in gems:
@@ -98,9 +92,7 @@ func update_grid_contents() -> void:
 			# Reset fall logic data for new column
 			column = gem.coords.x
 			gem_count = 0
-			expected_y = height - 1
 		gem_count += 1
-		expected_y = gem.coords.y - 1
 		gem.set_fall(height - gem_count - gem.coords.y, FallTypes.Regular, $Tween)
 
 	# Repeat spawn logic for empty last column(s)
@@ -112,7 +104,8 @@ func update_grid_contents() -> void:
 	actions_locked = true
 	$Tween.start()
 	yield($Tween, "tween_all_completed")
-	match_gems()
+	match_info.cascade += 1
+	match_gems(match_info)
 	actions_locked = false
 
 
@@ -153,18 +146,9 @@ func _ready() -> void:
 	reset_grid()
 
 func reset_grid():
-	generating = true
+	silent = true
 	for gem in $GemContainer.get_children():
 		gem.queue_free()
 	yield(get_tree(), "idle_frame")
-	update_grid_contents()
-	
-var generating : bool = true
+	update_grid_contents(MatchInfo.new())
 
-func emit_regular_match():
-	if not generating:
-		emit_signal("matched_basic")
-
-func emit_plus_match():
-	if not generating:
-		emit_signal("matched_plus")
