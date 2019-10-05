@@ -20,8 +20,6 @@ visible = false
 material = SubResource( 1 )
 texture = ExtResource( 2 )
 
-[node name="Tween" type="Tween" parent="Offset"]
-
 [node name="Area2D" type="Area2D" parent="Offset"]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Offset/Area2D"]

@@ -24,7 +24,7 @@ var actions_locked := false
 
 
 func find_gem(coord: Vector2):
-	for gem in get_children():
+	for gem in $GemContainer.get_children():
 		if gem.coords == coord:
 			return gem
 	return null
@@ -43,10 +43,11 @@ func try_swap(gem1, gem2) -> void:
 	var coords2 = gem2.coords
 	if not can_swap(coords1, coords2):
 		return
-	var tween = gem1.move_to(coords2)
-	gem2.move_to(coords1)
+	gem1.move_to(coords2, $Tween)
+	gem2.move_to(coords1, $Tween)
 	actions_locked = true
-	yield(tween, "tween_completed")
+	$Tween.start()
+	yield($Tween, "tween_all_completed")
 	actions_locked = false
 	match_gems()
 
@@ -54,12 +55,12 @@ func try_swap(gem1, gem2) -> void:
 func match_gems() -> void:
 	# Check for matched gems
 	var matches := 0
-	for gem in get_children():
+	for gem in $GemContainer.get_children():
 		if gem.check_matches():
 			matches += 1
 
 	# Remove matched gems
-	for gem in get_children():
+	for gem in $GemContainer.get_children():
 		if gem.to_remove:
 			gem.queue_free()
 
@@ -71,13 +72,14 @@ func match_gems() -> void:
 		emit_signal("matched_basic")
 
 	# Update remaining grid contents
-	yield(get_tree(), "idle_frame")
-	update_grid_contents()
+	if matches > 0:
+		yield(get_tree(), "idle_frame")
+		update_grid_contents()
 
 
 func update_grid_contents() -> void:
 	# Init update logic variables
-	var gems = get_children()
+	var gems = $GemContainer.get_children()
 	gems.sort_custom(self, "sort_update_order")
 	var column := 0
 	var gem_count := 0
@@ -97,7 +99,7 @@ func update_grid_contents() -> void:
 			expected_y = height - 1
 		gem_count += 1
 		expected_y = gem.coords.y - 1
-		gem.set_fall(height - gem_count - gem.coords.y, FallTypes.Regular)
+		gem.set_fall(height - gem_count - gem.coords.y, FallTypes.Regular, $Tween)
 
 	# Repeat spawn logic for empty last column(s)
 	spawn_gems(column, height - gem_count)
@@ -105,8 +107,11 @@ func update_grid_contents() -> void:
 		spawn_gems(col, height)
 
 	# All required data computed, now to animate
-	for gem in get_children():
-		gem.start_fall()
+	actions_locked = true
+	$Tween.start()
+	yield($Tween, "tween_all_completed")
+	match_gems()
+	actions_locked = false
 
 
 func sort_update_order(gem1, gem2) -> bool:
@@ -124,8 +129,8 @@ func spawn_gems(column: int, fall_distance: int) -> void:
 		gem.texture = GemTextures[gem.type]
 		gem.coords = Vector2(column, y)
 		gem.connect("gem_selected", self, "_on_gem_selected")
-		gem.set_fall(fall_distance, FallTypes.Spawn)
-		add_child(gem)
+		gem.set_fall(fall_distance, FallTypes.Spawn, $Tween)
+		$GemContainer.add_child(gem)
 
 
 func _on_gem_selected(gem) -> void:

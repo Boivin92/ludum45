@@ -11,12 +11,16 @@ script = ExtResource( 1 )
 height = 4
 width = 4
 
-[node name="Gem1" parent="." instance=ExtResource( 2 )]
+[node name="Tween" type="Tween" parent="."]
+
+[node name="GemContainer" type="Node2D" parent="."]
+
+[node name="Gem1" parent="GemContainer" instance=ExtResource( 2 )]
 margin_right = 128.0
 margin_bottom = 128.0
 texture = ExtResource( 3 )
 
-[node name="Gem2" parent="." instance=ExtResource( 2 )]
+[node name="Gem2" parent="GemContainer" instance=ExtResource( 2 )]
 margin_left = 128.0
 margin_right = 256.0
 margin_bottom = 128.0
@@ -24,7 +28,7 @@ texture = ExtResource( 4 )
 coords = Vector2( 1, 0 )
 type = 1
 
-[node name="Gem3" parent="." instance=ExtResource( 2 )]
+[node name="Gem3" parent="GemContainer" instance=ExtResource( 2 )]
 margin_left = 256.0
 margin_right = 384.0
 margin_bottom = 128.0
@@ -32,7 +36,7 @@ texture = ExtResource( 5 )
 coords = Vector2( 2, 0 )
 type = 2
 
-[node name="Gem4" parent="." instance=ExtResource( 2 )]
+[node name="Gem4" parent="GemContainer" instance=ExtResource( 2 )]
 margin_top = 128.0
 margin_right = 128.0
 margin_bottom = 256.0
@@ -40,7 +44,7 @@ texture = ExtResource( 5 )
 coords = Vector2( 0, 1 )
 type = 2
 
-[node name="Gem5" parent="." instance=ExtResource( 2 )]
+[node name="Gem5" parent="GemContainer" instance=ExtResource( 2 )]
 margin_left = 128.0
 margin_top = 128.0
 margin_right = 256.0
@@ -49,7 +53,7 @@ texture = ExtResource( 4 )
 coords = Vector2( 1, 1 )
 type = 1
 
-[node name="Gem6" parent="." instance=ExtResource( 2 )]
+[node name="Gem6" parent="GemContainer" instance=ExtResource( 2 )]
 margin_left = 256.0
 margin_top = 128.0
 margin_right = 384.0
@@ -57,7 +61,7 @@ margin_bottom = 256.0
 texture = ExtResource( 3 )
 coords = Vector2( 2, 1 )
 
-[node name="Gem7" parent="." instance=ExtResource( 2 )]
+[node name="Gem7" parent="GemContainer" instance=ExtResource( 2 )]
 margin_top = 256.0
 margin_right = 128.0
 margin_bottom = 384.0
@@ -65,7 +69,7 @@ texture = ExtResource( 5 )
 coords = Vector2( 0, 2 )
 type = 2
 
-[node name="Gem8" parent="." instance=ExtResource( 2 )]
+[node name="Gem8" parent="GemContainer" instance=ExtResource( 2 )]
 margin_left = 256.0
 margin_top = 256.0
 margin_right = 384.0
@@ -74,20 +78,19 @@ texture = ExtResource( 4 )
 coords = Vector2( 2, 2 )
 type = 1
 
-[node name="Gem9" parent="." instance=ExtResource( 2 )]
+[node name="Gem9" parent="GemContainer" instance=ExtResource( 2 )]
 margin_left = 128.0
 margin_top = 256.0
 margin_right = 256.0
 margin_bottom = 384.0
 texture = ExtResource( 3 )
 coords = Vector2( 1, 2 )
-
-[connection signal="gem_selected" from="Gem1" to="." method="_on_gem_selected"]
-[connection signal="gem_selected" from="Gem2" to="." method="_on_gem_selected"]
-[connection signal="gem_selected" from="Gem3" to="." method="_on_gem_selected"]
-[connection signal="gem_selected" from="Gem4" to="." method="_on_gem_selected"]
-[connection signal="gem_selected" from="Gem5" to="." method="_on_gem_selected"]
-[connection signal="gem_selected" from="Gem6" to="." method="_on_gem_selected"]
-[connection signal="gem_selected" from="Gem7" to="." method="_on_gem_selected"]
-[connection signal="gem_selected" from="Gem8" to="." method="_on_gem_selected"]
-[connection signal="gem_selected" from="Gem9" to="." method="_on_gem_selected"]
+[connection signal="gem_selected" from="GemContainer/Gem1" to="." method="_on_gem_selected"]
+[connection signal="gem_selected" from="GemContainer/Gem2" to="." method="_on_gem_selected"]
+[connection signal="gem_selected" from="GemContainer/Gem3" to="." method="_on_gem_selected"]
+[connection signal="gem_selected" from="GemContainer/Gem4" to="." method="_on_gem_selected"]
+[connection signal="gem_selected" from="GemContainer/Gem5" to="." method="_on_gem_selected"]
+[connection signal="gem_selected" from="GemContainer/Gem6" to="." method="_on_gem_selected"]
+[connection signal="gem_selected" from="GemContainer/Gem7" to="." method="_on_gem_selected"]
+[connection signal="gem_selected" from="GemContainer/Gem8" to="." method="_on_gem_selected"]
+[connection signal="gem_selected" from="GemContainer/Gem9" to="." method="_on_gem_selected"]
