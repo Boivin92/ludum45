@@ -1,15 +1,21 @@
 extends Node2D
 
+signal transition_completed()
+
 func _ready() -> void:
-	$FocusPoint.set_pos($Tapisserie.get_next_step_position())
-	$Tapisserie.show_current_step()
+	$DialogBox.text = poems[step]
+	step += 1
 	
-	
+var step : int = 0
+export(Array, String, MULTILINE) var poems = []
+
 func _process(delta: float) -> void:
 	if Input.is_action_just_pressed("ui_accept"):
-		var next_position = $Tapisserie.get_next_step_position()
-		if next_position:
-			$FocusPoint.move_to(next_position)
+		$AnimationPlayer.play("transition" + str(step))
 
-func _on_FocusPoint_moved() -> void:
-	$Tapisserie.show_current_step()
+func start_new_game():
+	emit_signal("transition_completed")
+
+func _on_AnimationPlayer_animation_finished(anim_name: String) -> void:
+	$DialogBox.text = poems[step]
+	step += 1
