@@ -4,10 +4,10 @@
 [ext_resource path="res://tapisserie/Tapisserie.tscn" type="PackedScene" id=2]
 [ext_resource path="res://tapisserie/FocusPoint.tscn" type="PackedScene" id=3]
 [ext_resource path="res://testScenes/border.png" type="Texture" id=4]
-[ext_resource path="res://icon.png" type="Texture" id=5]
-[ext_resource path="res://textBox/TextBox.tscn" type="PackedScene" id=6]
+[ext_resource path="res://textBox/TextBox.tscn" type="PackedScene" id=5]
+[ext_resource path="res://Grid/Grid.tscn" type="PackedScene" id=6]
 
-[sub_resource type="Animation" id=6]
+[sub_resource type="Animation" id=1]
 resource_name = "transition1"
 length = 43.0
 step = 1.0
@@ -74,7 +74,7 @@ tracks/4/keys = {
 "values": [ 0.0, 0.0, 1.0 ]
 }
 
-[sub_resource type="Animation" id=7]
+[sub_resource type="Animation" id=2]
 resource_name = "transition2"
 length = 43.0
 step = 1.0
@@ -141,7 +141,7 @@ tracks/4/keys = {
 "values": [ 0.0, 0.0, 1.0 ]
 }
 
-[sub_resource type="Animation" id=8]
+[sub_resource type="Animation" id=3]
 resource_name = "transition3"
 length = 43.0
 step = 1.0
@@ -268,19 +268,18 @@ position = Vector2( 0, 400 )
 texture = ExtResource( 4 )
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
-anims/transition1 = SubResource( 6 )
-anims/transition2 = SubResource( 7 )
-anims/transition3 = SubResource( 8 )
+anims/transition1 = SubResource( 1 )
+anims/transition2 = SubResource( 2 )
+anims/transition3 = SubResource( 3 )
 
-[node name="GameScreen" type="Node2D" parent="."]
-
-[node name="Sprite" type="Sprite" parent="GameScreen"]
-scale = Vector2( 12, 12 )
-texture = ExtResource( 5 )
-
-[node name="DialogBox" parent="." instance=ExtResource( 6 )]
+[node name="DialogBox" parent="." instance=ExtResource( 5 )]
 modulate = Color( 1, 1, 1, 0 )
 text = ""
 percent_visible = 0.0
+
+[node name="GameScreen" type="Node2D" parent="."]
+
+[node name="Grid" parent="GameScreen" instance=ExtResource( 6 )]
+position = Vector2( -192.476, -192.476 )
 [connection signal="moved" from="FocusPoint" to="." method="_on_FocusPoint_moved"]
 [connection signal="animation_finished" from="AnimationPlayer" to="." method="_on_AnimationPlayer_animation_finished"]

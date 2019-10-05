@@ -79,7 +79,6 @@ margin_right = 256.0
 margin_bottom = 384.0
 texture = ExtResource( 3 )
 coords = Vector2( 1, 2 )
-
 [connection signal="gem_selected" from="Gem1" to="." method="_on_gem_selected"]
 [connection signal="gem_selected" from="Gem2" to="." method="_on_gem_selected"]
 [connection signal="gem_selected" from="Gem3" to="." method="_on_gem_selected"]
