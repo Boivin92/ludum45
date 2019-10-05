@@ -1,0 +1,15 @@
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://Grid/Gem/Gem.gd" type="Script" id=1]
+[ext_resource path="res://Grid/Gem/Highlight.tres" type="Texture" id=2]
+
+[node name="Gem" type="TextureRect"]
+script = ExtResource( 1 )
+
+[node name="Highlight" type="Sprite" parent="."]
+visible = false
+texture = ExtResource( 2 )
+centered = false
+
+[node name="Tween" type="Tween" parent="."]
+
