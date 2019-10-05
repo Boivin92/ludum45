@@ -1,0 +1,21 @@
+[remap]
+
+importer="wav"
+type="AudioStreamSample"
+path="res://.import/music_harp_peaceful_loop.wav-f2dc0502423b036a884a1267e33ac718.sample"
+
+[deps]
+
+source_file="res://sounds/music_harp_peaceful_loop.wav"
+dest_files=[ "res://.import/music_harp_peaceful_loop.wav-f2dc0502423b036a884a1267e33ac718.sample" ]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=true
+edit/normalize=true
+edit/loop=true
+compress/mode=0
