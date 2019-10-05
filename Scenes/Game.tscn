@@ -6,7 +6,6 @@
 [ext_resource path="res://Arts/GearCouleur.png" type="Texture" id=4]
 [ext_resource path="res://Scenes/LabelMorris.tscn" type="PackedScene" id=5]
 
-
 [sub_resource type="DynamicFont" id=1]
 size = 160
 font_data = ExtResource( 2 )

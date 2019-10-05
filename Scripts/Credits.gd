@@ -5,5 +5,5 @@ func _ready() -> void:
 
 
 func _on_RetourAccueil_pressed() -> void:
-	get_tree().change_scene("res://EcranAccueil.tscn")
+	get_tree().change_scene("res://Scenes/EcranAccueil.tscn")
 	pass 

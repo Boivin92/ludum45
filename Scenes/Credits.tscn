@@ -1,18 +1,23 @@
-[gd_scene load_steps=8 format=2]
+[gd_scene load_steps=10 format=2]
 
 [ext_resource path="res://Scripts/Credits.gd" type="Script" id=1]
-[ext_resource path="res://Fonts/MorrisRoman-Black.ttf" type="DynamicFontData" id=2]
-[ext_resource path="res://Arts/gear.png" type="Texture" id=3]
-[ext_resource path="res://Arts/GearCouleur.png" type="Texture" id=4]
-[ext_resource path="res://Scenes/LabelMorris.tscn" type="PackedScene" id=5]
+[ext_resource path="res://Arts/luneTxtre.png" type="Texture" id=2]
+[ext_resource path="res://Fonts/MorrisRoman-Black.ttf" type="DynamicFontData" id=3]
+[ext_resource path="res://Arts/gear.png" type="Texture" id=4]
+[ext_resource path="res://Arts/GearCouleur.png" type="Texture" id=5]
+[ext_resource path="res://Scenes/LabelMorris.tscn" type="PackedScene" id=6]
 
+[sub_resource type="StyleBoxTexture" id=1]
+texture = ExtResource( 2 )
+region_rect = Rect2( 0, 0, 150, 94 )
+modulate_color = Color( 1, 1, 1, 0.392157 )
 
-[sub_resource type="DynamicFont" id=1]
-font_data = ExtResource( 2 )
+[sub_resource type="DynamicFont" id=3]
+font_data = ExtResource( 3 )
 
 [sub_resource type="DynamicFont" id=2]
 size = 50
-font_data = ExtResource( 2 )
+font_data = ExtResource( 3 )
 
 [node name="Credits" type="Node2D"]
 position = Vector2( 0, -9.08829 )
@@ -22,11 +27,20 @@ script = ExtResource( 1 )
 anchor_right = 1.0
 anchor_bottom = 1.0
 
-[node name="TextEdit" type="TextEdit" parent="VBoxContainer"]
-margin_right = 244.0
-size_flags_horizontal = 3
+[node name="Panel" type="Panel" parent="VBoxContainer"]
+margin_right = 1600.0
+margin_bottom = 800.0
+rect_min_size = Vector2( 1600, 800 )
 size_flags_vertical = 3
-custom_fonts/font = SubResource( 1 )
+custom_styles/panel = SubResource( 1 )
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="Label" type="Label" parent="VBoxContainer/Panel"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+custom_fonts/font = SubResource( 3 )
 text = "Lorem Ipsum
 \"Neque porro quisquam est qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit...\"
 \"Il ny a personne qui naime la souffrance pour elle-même, qui ne la recherche et qui ne la veuille pour elle-même...\"
@@ -54,18 +68,18 @@ Integer porttitor velit tristique nisi placerat iaculis.
 Ut vitae neque et velit luctus consectetur."
 
 [node name="RetourAccueil" type="TextureButton" parent="VBoxContainer"]
-margin_top = 4.0
-margin_right = 244.0
-margin_bottom = 112.0
+margin_top = 804.0
+margin_right = 1600.0
+margin_bottom = 912.0
 rect_min_size = Vector2( 244, 108 )
-texture_normal = ExtResource( 3 )
-texture_hover = ExtResource( 4 )
+texture_normal = ExtResource( 4 )
+texture_hover = ExtResource( 5 )
 
-[node name="Retour" parent="VBoxContainer/RetourAccueil" instance=ExtResource( 5 )]
+[node name="Retour" parent="VBoxContainer/RetourAccueil" instance=ExtResource( 6 )]
 margin_left = -122.0
-margin_top = -53.987
+margin_top = -54.0
 margin_right = 122.0
-margin_bottom = 54.013
+margin_bottom = 54.0
 custom_fonts/font = SubResource( 2 )
 text = "Retour"
 texte = "Retour"
