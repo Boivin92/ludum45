@@ -1,14 +1,16 @@
-[gd_scene load_steps=7 format=2]
+[gd_scene load_steps=6 format=2]
 
 [ext_resource path="res://Scripts/Game.gd" type="Script" id=1]
 [ext_resource path="res://Fonts/MorrisRoman-Black.ttf" type="DynamicFontData" id=2]
-[ext_resource path="res://Arts/gear.png" type="Texture" id=3]
-[ext_resource path="res://Arts/GearCouleur.png" type="Texture" id=4]
-[ext_resource path="res://Scenes/LabelMorris.tscn" type="PackedScene" id=5]
+[ext_resource path="res://Scenes/LabelMorris.tscn" type="PackedScene" id=3]
 
 [sub_resource type="DynamicFont" id=1]
 size = 160
 font_data = ExtResource( 2 )
+
+[sub_resource type="StreamTexture" id=2]
+flags = 4
+load_path = "res://.import/GearCouleur.png-21e2391fd1c7190f8e37c84ce84f96e6.stex"
 
 [node name="Game" type="Node2D"]
 script = ExtResource( 1 )
@@ -21,7 +23,7 @@ margin_bottom = 900.0
 
 [node name="Label" type="Label" parent="VBoxContainer"]
 margin_right = 1600.0
-margin_bottom = 788.0
+margin_bottom = 781.0
 size_flags_vertical = 3
 custom_fonts/font = SubResource( 1 )
 text = "Voici le jeu!"
@@ -29,21 +31,19 @@ align = 1
 valign = 1
 
 [node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer"]
-margin_top = 792.0
+margin_top = 785.0
 margin_right = 1600.0
 margin_bottom = 900.0
 custom_constants/separation = 10
 alignment = 1
 
 [node name="RetourAccueil" type="TextureButton" parent="VBoxContainer/HBoxContainer"]
-margin_left = 551.0
+margin_left = 532.0
 margin_right = 795.0
-margin_bottom = 108.0
+margin_bottom = 115.0
 rect_min_size = Vector2( 244, 108 )
-texture_normal = ExtResource( 3 )
-texture_hover = ExtResource( 4 )
 
-[node name="Retour" parent="VBoxContainer/HBoxContainer/RetourAccueil" instance=ExtResource( 5 )]
+[node name="Retour" parent="VBoxContainer/HBoxContainer/RetourAccueil" instance=ExtResource( 3 )]
 margin_left = -122.0
 margin_top = -53.987
 margin_right = 122.0
@@ -53,13 +53,12 @@ texte = "Retour"
 
 [node name="Credits" type="TextureButton" parent="VBoxContainer/HBoxContainer"]
 margin_left = 805.0
-margin_right = 1049.0
-margin_bottom = 108.0
+margin_right = 1068.0
+margin_bottom = 115.0
 rect_min_size = Vector2( 244, 108 )
-texture_normal = ExtResource( 3 )
-texture_hover = ExtResource( 4 )
+texture_hover = SubResource( 2 )
 
-[node name="Credits" parent="VBoxContainer/HBoxContainer/Credits" instance=ExtResource( 5 )]
+[node name="Credits" parent="VBoxContainer/HBoxContainer/Credits" instance=ExtResource( 3 )]
 margin_left = -122.0
 margin_top = -56.259
 margin_right = 122.0

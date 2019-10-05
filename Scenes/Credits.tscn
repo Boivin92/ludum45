@@ -1,57 +1,46 @@
-[gd_scene load_steps=12 format=2]
+[gd_scene load_steps=11 format=2]
 
 [ext_resource path="res://Scripts/Credits.gd" type="Script" id=1]
-[ext_resource path="res://Arts/luneAqua.png" type="Texture" id=2]
-[ext_resource path="res://Arts/luneTxtre.png" type="Texture" id=3]
+[ext_resource path="res://Arts/luneTxtre.png" type="Texture" id=2]
+[ext_resource path="res://Scenes/ScrollCredits.gd" type="Script" id=3]
 [ext_resource path="res://Fonts/MorrisRoman-Black.ttf" type="DynamicFontData" id=4]
-[ext_resource path="res://Arts/gear.png" type="Texture" id=5]
-[ext_resource path="res://Arts/GearCouleur.png" type="Texture" id=6]
-[ext_resource path="res://Scenes/LabelMorris.tscn" type="PackedScene" id=7]
-
-[sub_resource type="StyleBoxTexture" id=4]
-texture = ExtResource( 2 )
-region_rect = Rect2( 0, 0, 160, 216 )
+[ext_resource path="res://Arts/luneAqua.png" type="Texture" id=5]
+[ext_resource path="res://Scenes/LabelMorris.tscn" type="PackedScene" id=6]
 
 [sub_resource type="StyleBoxTexture" id=1]
-texture = ExtResource( 3 )
+texture = ExtResource( 2 )
 region_rect = Rect2( 0, 0, 150, 94 )
 modulate_color = Color( 1, 1, 1, 0.392157 )
 
 [sub_resource type="DynamicFont" id=2]
 font_data = ExtResource( 4 )
 
+[sub_resource type="StyleBoxTexture" id=4]
+texture = ExtResource( 5 )
+region_rect = Rect2( 0, 0, 160, 216 )
+
 [sub_resource type="DynamicFont" id=3]
 size = 50
 font_data = ExtResource( 4 )
 
-[node name="Credits" type="Node2D"]
-position = Vector2( 0, -9.08829 )
+[node name="Credits" type="Node"]
 script = ExtResource( 1 )
 
-[node name="VBoxContainer" type="VBoxContainer" parent="."]
-anchor_right = 1.0
-anchor_bottom = 1.0
-
-[node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer"]
-margin_right = 2604.0
+[node name="HBoxContainer" type="HBoxContainer" parent="."]
+margin_right = 3204.0
 margin_bottom = 800.0
 
-[node name="ScrollStory" type="Panel" parent="VBoxContainer/HBoxContainer"]
-margin_right = 1000.0
-margin_bottom = 800.0
-rect_min_size = Vector2( 1000, 0 )
-size_flags_vertical = 3
-custom_styles/panel = SubResource( 4 )
+[node name="Node2D" type="Node2D" parent="HBoxContainer"]
 
-[node name="ScrollCredits" type="Panel" parent="VBoxContainer/HBoxContainer"]
-margin_left = 1004.0
-margin_right = 1604.0
+[node name="ScrollCredits" type="Panel" parent="HBoxContainer/Node2D"]
+margin_right = 600.0
 margin_bottom = 800.0
 rect_min_size = Vector2( 600, 800 )
 size_flags_vertical = 3
 custom_styles/panel = SubResource( 1 )
+script = ExtResource( 3 )
 
-[node name="Label" type="Label" parent="VBoxContainer/HBoxContainer/ScrollCredits"]
+[node name="Label" type="Label" parent="HBoxContainer/Node2D/ScrollCredits"]
 anchor_left = 1.0
 anchor_right = 1.0
 anchor_bottom = 1.0
@@ -87,15 +76,27 @@ Integer porttitor velit tristique nisi placerat iaculis.
 Ut vitae neque et velit luctus consectetur."
 autowrap = true
 
-[node name="RetourAccueil" type="TextureButton" parent="VBoxContainer"]
-margin_top = 804.0
-margin_right = 2604.0
-margin_bottom = 912.0
-rect_min_size = Vector2( 244, 108 )
-texture_normal = ExtResource( 5 )
-texture_hover = ExtResource( 6 )
+[node name="Node2D2" type="Node2D" parent="HBoxContainer"]
 
-[node name="Retour" parent="VBoxContainer/RetourAccueil" instance=ExtResource( 7 )]
+[node name="ScrollStory" type="Panel" parent="HBoxContainer/Node2D2"]
+margin_right = 1000.0
+margin_bottom = 800.0
+rect_min_size = Vector2( 1000, 0 )
+size_flags_vertical = 3
+custom_styles/panel = SubResource( 4 )
+
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_right = 1604.0
+margin_bottom = 912.0
+
+[node name="RetourAccueil" type="TextureButton" parent="VBoxContainer"]
+margin_right = 3204.0
+margin_bottom = 115.0
+rect_min_size = Vector2( 244, 108 )
+
+[node name="Retour" parent="VBoxContainer/RetourAccueil" instance=ExtResource( 6 )]
 margin_top = -54.0
 margin_right = -556.0
 margin_bottom = 54.0

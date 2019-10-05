@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/GearCouleur.png-21e2391fd1c7190f8e37c84ce84f96e6.stex"
+path="res://.import/BoutonStart.png-a8f765de0040f278b71aa922a6193849.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Arts/GearCouleur.png"
-dest_files=[ "res://.import/GearCouleur.png-21e2391fd1c7190f8e37c84ce84f96e6.stex" ]
+source_file="res://Arts/BoutonStart.png"
+dest_files=[ "res://.import/BoutonStart.png-a8f765de0040f278b71aa922a6193849.stex" ]
 
 [params]
 
