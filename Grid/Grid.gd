@@ -88,22 +88,38 @@ func match_gems() -> void:
 
 
 func update_grid_contents() -> void:
+	# Init update logic variables
 	var gems = get_children()
 	gems.sort_custom(self, "sort_update_order")
 	var column := 0
 	var fall_distance := 0
+	var gem_count := 0
 	var expected_y := height - 1
+
+	# General algorithm
 	for gem in gems:
 		if gem.coords.x != column:
-			spawn_gems(column, fall_distance)
+			# Spawn gems for previous column
+			spawn_gems(column, height - gem_count)
+			# Spawn gems for any skipped column
+			for col in range(column + 1, gem.coords.x):
+				spawn_gems(col, height)
+			# Reset fall logic data for new column
 			column = gem.coords.x
 			fall_distance = 0
+			gem_count = 0
 			expected_y = height - 1
 		fall_distance += expected_y - gem.coords.y
+		gem_count += 1
 		expected_y = gem.coords.y - 1
 		gem.set_fall(fall_distance, FallTypes.Regular)
-	spawn_gems(column, fall_distance)
 
+	# Repeat spawn logic for empty last column(s)
+	spawn_gems(column, height - gem_count)
+	for col in range(column + 1, width):
+		spawn_gems(col, height)
+
+	# All required data computed, now to animate
 	for gem in get_children():
 		gem.start_fall()
 
