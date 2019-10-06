@@ -1,5 +1,3 @@
-tool
-
 extends Node2D
 
 export(int, 3, 12) var height := 3
@@ -9,6 +7,8 @@ export(Resource) var puzzle_data
 
 signal matched(match_info)
 signal cascade_finished
+signal no_moves_left()
+signal size_changed()
 
 const Gem = preload("res://Grid/Gem/Gem.tscn")
 enum FallTypes { Regular, Spawn }
@@ -45,8 +45,15 @@ func try_swap(gem1, gem2) -> void:
 	actions_locked = true
 	$Tween.start()
 	yield($Tween, "tween_all_completed")
+	var match_info = MatchInfo.new()
+	match_gems(match_info)
+	if match_info.count == 0 and match_info.cascade == 0:
+		gem1.move_to(coords1, $Tween)
+		gem2.move_to(coords2, $Tween)
+		actions_locked = true
+		$Tween.start()
+		yield($Tween, "tween_all_completed")
 	actions_locked = false
-	match_gems(MatchInfo.new())
 
 
 func match_gems(match_info: MatchInfo) -> void:
@@ -75,6 +82,8 @@ func match_gems(match_info: MatchInfo) -> void:
 		if not silent:
 			emit_signal("cascade_finished")
 		silent = false
+		if not matches_remaining():
+			emit_signal("no_moves_left")
 
 
 func update_grid_contents(match_info: MatchInfo) -> void:
@@ -108,13 +117,11 @@ func update_grid_contents(match_info: MatchInfo) -> void:
 	spawn_gems(spawn_counts, match_info)
 
 	# All required data computed, now to animate
-	actions_locked = true
 	$Tween.start()
 	yield($Tween, "tween_all_completed")
 	match_info.cascade += 1
 	match_info.clear_matches()
 	match_gems(match_info)
-	actions_locked = false
 
 
 func sort_update_order(gem1, gem2) -> bool:
@@ -125,13 +132,13 @@ func sort_update_order(gem1, gem2) -> bool:
 
 func spawn_gems(counts: Array, match_info: MatchInfo) -> void:
 	var total := 0
-	if match_info.count > 1 or match_info.cascade > 2:
+	if not silent and (match_info.count > 1 or match_info.cascade > 1):
 		for count in counts:
 			total += count
 	for x in range(counts.size()):
 		for y in range(-1, -counts[x] - 1, -1):
 			var type := -1
-			if total > 0 and floor(rand_range(0, total)):
+			if total > 0 and floor(rand_range(0, total)) == 0:
 				type = MatchInfo.Types.Gear
 				total = 0
 			spawn_gem_at(Vector2(x, y), counts[x], type)
@@ -192,8 +199,25 @@ func reset_grid():
 	update_grid_contents(MatchInfo.new())
 
 
-func _get_configuration_warning() -> String:
+func matches_remaining() -> bool:
+	for gem in $GemContainer.get_children():
+		if gem.is_match_possible():
+			return true
+	return false
+
+
+func load_level(h: int, w: int, puzzle = null):
+	silent = true
+	for gem in $GemContainer.get_children():
+		gem.queue_free()
+	yield(get_tree(), "idle_frame")
+	height = h
+	width = w
+	emit_signal("size_changed")
+	puzzle_mode = puzzle != null
+	puzzle_data = puzzle
 	if puzzle_mode:
-		if not puzzle_data:
-			return "Grid set to puzzle mode does not have puzzle data"
-	return ""
+		load_puzzle_data()
+		silent = false
+	else:
+		update_grid_contents(MatchInfo.new())

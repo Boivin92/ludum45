@@ -8,6 +8,7 @@ export(PackedScene) var flareScene
 var colorGenerator = RandomColorGenerator.new()
 
 func _ready() -> void:
+	$AnimationPlayer.play("gameStart")
 	$DialogBox.text = poems[step]
 	step += 1
 	
@@ -21,6 +22,8 @@ func transition_to_next():
 	$AnimationPlayer.play("transition" + str(step))
 
 func _on_AnimationPlayer_animation_finished(anim_name: String) -> void:
+	if anim_name == "gameStart":
+		return
 	if step == poems.size():
 		emit_signal("transition_completed")
 		return
@@ -48,3 +51,10 @@ func spawn_light_flare(number : int):
 		newFlare.set_wait(rand_range(0 , 1.5))
 		newFlare.color = colorGenerator.Generate()
 		$Lights.add_child(newFlare)
+
+func _on_Grid_no_moves_left() -> void:
+	$GameScreen/Grid.reset_grid()
+
+
+func _on_Game_transition_completed() -> void:
+	get_tree().change_scene("res://Scenes/Credits.tscn")

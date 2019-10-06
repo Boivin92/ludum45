@@ -1,4 +1,4 @@
-[gd_scene load_steps=46 format=2]
+[gd_scene load_steps=50 format=2]
 
 [ext_resource path="res://testScenes/testFocusPoint.gd" type="Script" id=1]
 [ext_resource path="res://LightFlare.tscn" type="PackedScene" id=2]
@@ -35,13 +35,54 @@
 [ext_resource path="res://Arts/animation/23.png" type="Texture" id=33]
 [ext_resource path="res://testScenes/BackgroundAnimation.gd" type="Script" id=34]
 [ext_resource path="res://Grid/Grid.tscn" type="PackedScene" id=35]
-[ext_resource path="res://testScenes/AudioStreamPlayer.gd" type="Script" id=36]
-[ext_resource path="res://sounds/Select4.ogg" type="AudioStream" id=37]
-[ext_resource path="res://sounds/LevelUp3.ogg" type="AudioStream" id=38]
+[ext_resource path="res://sounds/LevelUp3.ogg" type="AudioStream" id=36]
+[ext_resource path="res://testScenes/AudioStreamPlayer.gd" type="Script" id=37]
+[ext_resource path="res://sounds/ui_button_socket_movement_01.wav" type="AudioStream" id=38]
 [ext_resource path="res://sounds/music_harp_peaceful_loop.wav" type="AudioStream" id=39]
 
 [sub_resource type="Animation" id=1]
-resource_name = "transition1"
+resource_name = "gameStart"
+length = 4.0
+tracks/0/type = "value"
+tracks/0/path = NodePath("CanvasModulate:color")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( -0.5, 4 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Color( 0, 0, 0, 1 ), Color( 1, 1, 1, 1 ) ]
+}
+tracks/1/type = "method"
+tracks/1/path = NodePath("GameScreen")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"values": [ {
+"args": [ 0 ],
+"method": "load_level"
+} ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath("GameScreen:modulate")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0, 4 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 0 ), Color( 1, 1, 1, 1 ) ]
+}
+
+[sub_resource type="Animation" id=2]
 length = 18.0
 step = 1.0
 tracks/0/type = "value"
@@ -83,7 +124,7 @@ tracks/2/keys = {
 } ]
 }
 tracks/3/type = "method"
-tracks/3/path = NodePath("GameScreen/Grid")
+tracks/3/path = NodePath("GameScreen")
 tracks/3/interp = 1
 tracks/3/loop_wrap = true
 tracks/3/imported = false
@@ -92,13 +133,12 @@ tracks/3/keys = {
 "times": PoolRealArray( 3 ),
 "transitions": PoolRealArray( 1 ),
 "values": [ {
-"args": [  ],
-"method": "reset_grid"
+"args": [ 1 ],
+"method": "load_level"
 } ]
 }
 
-[sub_resource type="Animation" id=2]
-resource_name = "transition2"
+[sub_resource type="Animation" id=3]
 length = 43.0
 step = 1.0
 tracks/0/type = "value"
@@ -164,22 +204,21 @@ tracks/4/keys = {
 "values": [ 0.0, 0.0, 1.0 ]
 }
 tracks/5/type = "method"
-tracks/5/path = NodePath("GameScreen/Grid")
+tracks/5/path = NodePath("GameScreen")
 tracks/5/interp = 1
 tracks/5/loop_wrap = true
 tracks/5/imported = false
 tracks/5/enabled = true
 tracks/5/keys = {
-"times": PoolRealArray( 27 ),
+"times": PoolRealArray( 3 ),
 "transitions": PoolRealArray( 1 ),
 "values": [ {
-"args": [  ],
-"method": "reset_grid"
+"args": [ 2 ],
+"method": "load_level"
 } ]
 }
 
-[sub_resource type="Animation" id=3]
-resource_name = "transition3"
+[sub_resource type="Animation" id=4]
 length = 43.0
 step = 1.0
 tracks/0/type = "value"
@@ -245,22 +284,21 @@ tracks/4/keys = {
 "values": [ 0.0, 0.0, 1.0 ]
 }
 tracks/5/type = "method"
-tracks/5/path = NodePath("GameScreen/Grid")
+tracks/5/path = NodePath("GameScreen")
 tracks/5/interp = 1
 tracks/5/loop_wrap = true
 tracks/5/imported = false
 tracks/5/enabled = true
 tracks/5/keys = {
-"times": PoolRealArray( 27 ),
+"times": PoolRealArray( 3 ),
 "transitions": PoolRealArray( 1 ),
 "values": [ {
-"args": [  ],
-"method": "reset_grid"
+"args": [ 3 ],
+"method": "load_level"
 } ]
 }
 
-[sub_resource type="Animation" id=4]
-resource_name = "transition4"
+[sub_resource type="Animation" id=5]
 length = 43.0
 step = 1.0
 tracks/0/type = "value"
@@ -326,25 +364,230 @@ tracks/4/keys = {
 "values": [ 0.0, 0.0, 1.0 ]
 }
 tracks/5/type = "method"
-tracks/5/path = NodePath("GameScreen/Grid")
+tracks/5/path = NodePath("GameScreen")
 tracks/5/interp = 1
 tracks/5/loop_wrap = true
 tracks/5/imported = false
 tracks/5/enabled = true
 tracks/5/keys = {
-"times": PoolRealArray( 27 ),
+"times": PoolRealArray( 3 ),
 "transitions": PoolRealArray( 1 ),
 "values": [ {
-"args": [  ],
-"method": "reset_grid"
+"args": [ 4 ],
+"method": "load_level"
 } ]
 }
 
-[sub_resource type="DynamicFont" id=5]
+[sub_resource type="Animation" id=6]
+resource_name = "transition5"
+length = 43.0
+step = 1.0
+tracks/0/type = "value"
+tracks/0/path = NodePath("GameScreen:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 2, 40, 42 ),
+"transitions": PoolRealArray( 1, 1, 1, 1 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 1 ), Color( 1, 1, 1, 0 ), Color( 1, 1, 1, 0 ), Color( 1, 1, 1, 1 ) ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("Tapisserie:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 34, 40 ),
+"transitions": PoolRealArray( -2, 1 ),
+"update": 0,
+"values": [ Vector2( -2800, -1 ), Vector2( -3500, -1 ) ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath("DialogBox:modulate")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0, 4, 27, 30 ),
+"transitions": PoolRealArray( 1, 1, 1, 1 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 0 ), Color( 1, 1, 1, 1 ), Color( 1, 1, 1, 1 ), Color( 1, 1, 1, 0 ) ]
+}
+tracks/3/type = "method"
+tracks/3/path = NodePath("Tapisserie")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/keys = {
+"times": PoolRealArray( 30 ),
+"transitions": PoolRealArray( 1 ),
+"values": [ {
+"args": [ 4 ],
+"method": "show_step"
+} ]
+}
+tracks/4/type = "value"
+tracks/4/path = NodePath("DialogBox:percent_visible")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/keys = {
+"times": PoolRealArray( 0, 4, 24 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 0,
+"values": [ 0.0, 0.0, 1.0 ]
+}
+tracks/5/type = "method"
+tracks/5/path = NodePath("GameScreen")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/keys = {
+"times": PoolRealArray( 3 ),
+"transitions": PoolRealArray( 1 ),
+"values": [ {
+"args": [ 5 ],
+"method": "load_level"
+} ]
+}
+
+[sub_resource type="Animation" id=7]
+resource_name = "transition6"
+length = 43.0
+step = 1.0
+tracks/0/type = "value"
+tracks/0/path = NodePath("GameScreen:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 2, 40, 42 ),
+"transitions": PoolRealArray( 1, 1, 1, 1 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 1 ), Color( 1, 1, 1, 0 ), Color( 1, 1, 1, 0 ), Color( 1, 1, 1, 1 ) ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("Tapisserie:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 34, 40 ),
+"transitions": PoolRealArray( -2, 1 ),
+"update": 0,
+"values": [ Vector2( -3500, -1 ), Vector2( -4200, -1 ) ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath("DialogBox:modulate")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0, 4, 27, 30 ),
+"transitions": PoolRealArray( 1, 1, 1, 1 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 0 ), Color( 1, 1, 1, 1 ), Color( 1, 1, 1, 1 ), Color( 1, 1, 1, 0 ) ]
+}
+tracks/3/type = "method"
+tracks/3/path = NodePath("Tapisserie")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/keys = {
+"times": PoolRealArray( 30 ),
+"transitions": PoolRealArray( 1 ),
+"values": [ {
+"args": [ 5 ],
+"method": "show_step"
+} ]
+}
+tracks/4/type = "value"
+tracks/4/path = NodePath("DialogBox:percent_visible")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/keys = {
+"times": PoolRealArray( 0, 4, 24 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 0,
+"values": [ 0.0, 0.0, 1.0 ]
+}
+tracks/5/type = "method"
+tracks/5/path = NodePath("GameScreen")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/keys = {
+"times": PoolRealArray( 4 ),
+"transitions": PoolRealArray( 1 ),
+"values": [ {
+"args": [ 6 ],
+"method": "load_level"
+} ]
+}
+
+[sub_resource type="Animation" id=8]
+resource_name = "transition7"
+length = 23.0
+step = 1.0
+tracks/0/type = "value"
+tracks/0/path = NodePath("GameScreen:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 2 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 1 ), Color( 1, 1, 1, 0 ) ]
+}
+tracks/1/type = "method"
+tracks/1/path = NodePath("Tapisserie")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 8 ),
+"transitions": PoolRealArray( 1 ),
+"values": [ {
+"args": [ 6 ],
+"method": "show_step"
+} ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath("CanvasModulate:color")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 16, 22 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 1 ), Color( 0, 0, 0, 1 ) ]
+}
+
+[sub_resource type="DynamicFont" id=9]
 size = 22
 font_data = ExtResource( 9 )
 
-[sub_resource type="SpriteFrames" id=6]
+[sub_resource type="SpriteFrames" id=10]
 animations = [ {
 "frames": [ ExtResource( 11 ), ExtResource( 12 ), ExtResource( 13 ), ExtResource( 14 ), ExtResource( 15 ), ExtResource( 16 ), ExtResource( 17 ), ExtResource( 18 ), ExtResource( 19 ), ExtResource( 20 ), ExtResource( 21 ), ExtResource( 22 ), ExtResource( 23 ), ExtResource( 24 ), ExtResource( 25 ), ExtResource( 26 ), ExtResource( 27 ), ExtResource( 28 ), ExtResource( 29 ), ExtResource( 30 ), ExtResource( 31 ), ExtResource( 32 ), ExtResource( 33 ) ],
 "loop": false,
@@ -355,38 +598,62 @@ animations = [ {
 [node name="Game" type="Node2D"]
 script = ExtResource( 1 )
 flareScene = ExtResource( 2 )
-poems = [ "", "[center]Somewhere between here and nothingness[/center]
-A shadow appeared in the void
+poems = [ "", "Somewhere between here and nothingness,
+A shadow appeared in the void.
 
-Loneliness was his only friend
-Lost, without any souvenirs, she wandered into oblivion.
+Loneliness was its only friend,
+Lost, without any souvenirs, it wandered into oblivion.
 
-When suddenly, a spark appeared
-It revealed his true identity.
+When suddenly, a spark appeared,
+Revealing its true identity.
 
-Sadly, She had nothing
+Sadly, it had nothing,
 Not even the slightest memories.
 
-Floating in the dark sky
-She began wandering.", "Dragged by the sound of a crying child,
-She appeared near an hollow house.
+Floating in the dark sky,
+It began wandering.", "Dragged by the sound of a crying child,
+The shadow appeared near a hollow house.
 
-A little basket was whimpering as loud has it could
+A little basket was whimpering as loud as it could,
 In front of the orphanage door.
 
-The baby grown into a cunning young girl
-Pushed by her curiosity, wits and creativity ", "She evolved from an orphan to a prodigy
-And tried to make her dream reality.
+The baby has grown into a cunning young girl,
+Pushed by her curiosity, wits and creativity.
+", "The young girl evolved from an orphan to a prodigy,
+And tried to make her dreams reality.
 
-Researching and studying night and day
-She managed to find a way
+Researching and studying night and day,
+She managed to find a way.
 
-After so mush years of drawing and calculating
-Her path was now clear, the plan was set.", "In an abandoned factory,
-She remodel it to be her own laboratory
+After so many years of drawing and calculating,
+Her path was now clear and the plan was set.
 
-Armed with gears, tools, junks and willingness
-She began crafting what had once just been an idea" ]
+After so many drawings and calculations,
+Her path now clear, she needed to shape her vision.", "The young woman found an abandoned factory,
+Remodeled it to be her own laboratory.
+
+Armed with gears, tools, junks and willingness,
+She began crafting what had once been an idea.
+ambition, aspiration, goal
+
+Finally, after an uncalculated number of hours and days,
+She achieved the creation of her long waited invention...
+
+[center]A rocket.[/center]
+", "She jumped into what would be her freedom,
+Buckled her belt and started the engines.
+
+After one last glance at the workshop,
+She launched into the sky and stars without regret.
+
+Fearless towards her destination,
+She set sail on her journey.
+
+Traveling into through towards the light,
+She finally landed at her destination...
+
+[center]The moon.[/center]
+", "" ]
 
 [node name="background" type="Sprite" parent="."]
 position = Vector2( -512.177, -16.6616 )
@@ -412,15 +679,19 @@ scale = Vector2( 1.01, 1.01 )
 texture = ExtResource( 6 )
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
-anims/transition1 = SubResource( 1 )
-anims/transition2 = SubResource( 2 )
-anims/transition3 = SubResource( 3 )
-anims/transition4 = SubResource( 4 )
+anims/gameStart = SubResource( 1 )
+anims/transition1 = SubResource( 2 )
+anims/transition2 = SubResource( 3 )
+anims/transition3 = SubResource( 4 )
+anims/transition4 = SubResource( 5 )
+anims/transition5 = SubResource( 6 )
+anims/transition6 = SubResource( 7 )
+anims/transition7 = SubResource( 8 )
 script = ExtResource( 7 )
 
 [node name="DialogBox" parent="." instance=ExtResource( 8 )]
 modulate = Color( 1, 1, 1, 0 )
-custom_fonts/mono_font = SubResource( 5 )
+custom_fonts/mono_font = SubResource( 9 )
 visible_characters = 0
 percent_visible = 0.0
 
@@ -432,7 +703,7 @@ script = ExtResource( 10 )
 
 [node name="BackgroundAnimation" type="AnimatedSprite" parent="GameScreen/Node2D"]
 modulate = Color( 1, 1, 1, 0.411765 )
-frames = SubResource( 6 )
+frames = SubResource( 10 )
 script = ExtResource( 34 )
 
 [node name="Grid" parent="GameScreen" instance=ExtResource( 35 )]
@@ -442,19 +713,25 @@ puzzle_mode = false
 puzzle_data = null
 
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="GameScreen"]
-script = ExtResource( 36 )
-regular = ExtResource( 37 )
-success = ExtResource( 38 )
+stream = ExtResource( 36 )
+script = ExtResource( 37 )
+regular = ExtResource( 38 )
+success = ExtResource( 36 )
 
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
 stream = ExtResource( 39 )
 autoplay = true
 
 [node name="Lights" type="Node2D" parent="."]
+
+[node name="CanvasModulate" type="CanvasModulate" parent="."]
+[connection signal="transition_completed" from="." to="." method="_on_Game_transition_completed"]
 [connection signal="moved" from="FocusPoint" to="." method="_on_FocusPoint_moved"]
 [connection signal="animation_finished" from="AnimationPlayer" to="." method="_on_AnimationPlayer_animation_finished"]
 [connection signal="animation_finished" from="GameScreen/Node2D/BackgroundAnimation" to="GameScreen/Node2D/BackgroundAnimation" method="_on_BackgroundAnimation_animation_finished"]
 [connection signal="cascade_finished" from="GameScreen/Grid" to="." method="_on_Grid_cascade_finished"]
 [connection signal="matched" from="GameScreen/Grid" to="GameScreen/AudioStreamPlayer" method="_on_Grid_matched"]
 [connection signal="matched" from="GameScreen/Grid" to="GameScreen/Node2D/BackgroundAnimation" method="_on_Grid_matched"]
-[connection signal="matched" from="GameScreen/Grid" to="." method="_on_Grid_matched"]
+[connection signal="no_moves_left" from="GameScreen/Grid" to="GameScreen/AudioStreamPlayer" method="_on_Grid_no_moves_left"]
+[connection signal="no_moves_left" from="GameScreen/Grid" to="." method="_on_Grid_no_moves_left"]
+[connection signal="size_changed" from="GameScreen/Grid" to="GameScreen" method="_on_Grid_size_changed"]
