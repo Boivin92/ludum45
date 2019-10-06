@@ -32,7 +32,7 @@ _global_script_class_icons={
 
 [application]
 
-config/name="ludum45"
+config/name="Pen's Elope"
 run/main_scene="res://Scenes/EcranAccueil.tscn"
 config/icon="res://icon.png"
 
