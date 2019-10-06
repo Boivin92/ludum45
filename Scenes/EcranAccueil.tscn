@@ -1,4 +1,4 @@
-[gd_scene load_steps=7 format=2]
+[gd_scene load_steps=8 format=2]
 
 [ext_resource path="res://Scripts/EcranAccueil.gd" type="Script" id=1]
 [ext_resource path="res://Arts/TitleScreenBG.png" type="Texture" id=2]
@@ -6,6 +6,7 @@
 [ext_resource path="res://Arts/BoutonStartHighlight.png" type="Texture" id=4]
 [ext_resource path="res://Arts/BoutonAbout.png" type="Texture" id=5]
 [ext_resource path="res://Arts/BoutonAboutHighlight.png" type="Texture" id=6]
+[ext_resource path="res://sounds/music_misty_woods_calling.wav" type="AudioStream" id=7]
 
 [node name="Control" type="Control"]
 anchor_right = 1.0
@@ -37,5 +38,10 @@ margin_bottom = 918.088
 rect_min_size = Vector2( 244, 108 )
 texture_normal = ExtResource( 5 )
 texture_hover = ExtResource( 6 )
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 7 )
+volume_db = -10.0
+autoplay = true
 [connection signal="pressed" from="StartGame" to="." method="_on_StartGame_pressed"]
 [connection signal="pressed" from="Infos" to="." method="_on_Infos_pressed"]

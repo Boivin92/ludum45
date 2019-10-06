@@ -1,4 +1,4 @@
-[gd_scene load_steps=13 format=2]
+[gd_scene load_steps=14 format=2]
 
 [ext_resource path="res://Scripts/Credits.gd" type="Script" id=1]
 [ext_resource path="res://Arts/TexturePapierAquarelle.png" type="Texture" id=2]
@@ -8,6 +8,7 @@
 [ext_resource path="res://Scenes/Names.gd" type="Script" id=6]
 [ext_resource path="res://Arts/BackButton.png" type="Texture" id=7]
 [ext_resource path="res://Arts/BackButtonhighlight.png" type="Texture" id=8]
+[ext_resource path="res://sounds/music_misty_woods_calling.wav" type="AudioStream" id=9]
 
 [sub_resource type="DynamicFont" id=1]
 size = 50
@@ -140,5 +141,9 @@ size_flags_vertical = 3
 texture_normal = ExtResource( 7 )
 texture_hover = ExtResource( 8 )
 expand = true
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 9 )
+autoplay = true
 [connection signal="animation_finished" from="HBoxContainer/Credits/AnimationPlayer" to="HBoxContainer/Credits" method="_on_AnimationPlayer_animation_finished"]
 [connection signal="pressed" from="RetourAccueil" to="." method="_on_RetourAccueil_pressed"]
