@@ -75,6 +75,8 @@ func match_gems(match_info: MatchInfo) -> void:
 		if not silent:
 			emit_signal("cascade_finished")
 		silent = false
+		if not matches_remaining():
+			reset_grid()
 
 
 func update_grid_contents(match_info: MatchInfo) -> void:
@@ -197,3 +199,9 @@ func _get_configuration_warning() -> String:
 		if not puzzle_data:
 			return "Grid set to puzzle mode does not have puzzle data"
 	return ""
+
+func matches_remaining() -> bool:
+	for gem in $GemContainer.get_children():
+		if gem.is_match_possible():
+			return true
+	return false

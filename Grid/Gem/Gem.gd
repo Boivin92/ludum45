@@ -80,7 +80,7 @@ func set_fall(distance: int, fall_type: int, tween: Tween) -> void:
 func _gui_input(event: InputEvent) -> void:
 	if event.is_action_released("ui_select"):
 		emit_signal("gem_selected", self)
-		
+		print(is_match_possible())
 		
 		
 		
@@ -93,10 +93,42 @@ func is_match_possible() -> bool:
 	for pattern in patterns:
 		var matching_type_counter = 0
 		for raycast in pattern:
-			var collision = raycast.get_collider()
-			if collision:
-				if collision.find_parent("Gem*").type == self.type:
+			if get_type_of_gem(raycast) == self.type:
 					matching_type_counter += 1
 		if matching_type_counter >= 2:
 			return true
+	if check_split_lines():
+		return true
 	return false
+
+func check_split_lines() -> bool:
+	if get_type_of_gem($Offset/Area2D/RayCastRight) == get_type_of_gem($Offset/Area2D/RayCastLeft):
+		if get_gem($Offset/Area2D/RayCastRight).has_neighbour_same_type("horizontal"):
+			return true
+		if get_gem($Offset/Area2D/RayCastLeft).has_neighbour_same_type("horizontal"):
+			return true
+	if get_type_of_gem($Offset/Area2D/RayCastUp) == get_type_of_gem($Offset/Area2D/RayCastDown):
+		if get_gem($Offset/Area2D/RayCastUp).has_neighbour_same_type("vertical"):
+			return true
+		if get_gem($Offset/Area2D/RayCastDown).has_neighbour_same_type("vertical"):
+			return true
+	return false
+
+func has_neighbour_same_type(orientation) -> bool: #"vertical" or "horizontal" 
+	if orientation == "vertical":
+		if get_type_of_gem($Offset/Area2D/RayCastUp) == self.type or get_type_of_gem($Offset/Area2D/RayCastDown) == self.type:
+			return true
+	if orientation == "horizontal":
+		if get_type_of_gem($Offset/Area2D/RayCastRight) == self.type or get_type_of_gem($Offset/Area2D/RayCastLeft) == self.type:
+			return true
+	return false
+
+func get_gem(raycast):
+	var collision = raycast.get_collider()
+	if collision:
+		return collision.find_parent("Gem*")
+
+func get_type_of_gem(raycast):
+	var collision = raycast.get_collider()
+	if collision:
+		return collision.find_parent("Gem*").type
