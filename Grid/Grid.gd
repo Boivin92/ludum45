@@ -8,6 +8,7 @@ export(Resource) var puzzle_data
 signal matched(match_info)
 signal cascade_finished
 signal no_moves_left()
+signal size_changed()
 
 const Gem = preload("res://Grid/Gem/Gem.tscn")
 enum FallTypes { Regular, Spawn }
@@ -212,6 +213,7 @@ func load_level(h: int, w: int, puzzle = null):
 	yield(get_tree(), "idle_frame")
 	height = h
 	width = w
+	emit_signal("size_changed")
 	puzzle_mode = puzzle != null
 	puzzle_data = puzzle
 	if puzzle_mode:

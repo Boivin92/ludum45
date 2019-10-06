@@ -22,6 +22,8 @@ func transition_to_next():
 	$AnimationPlayer.play("transition" + str(step))
 
 func _on_AnimationPlayer_animation_finished(anim_name: String) -> void:
+	if anim_name == "gameStart":
+		return
 	if step == poems.size():
 		emit_signal("transition_completed")
 		return
