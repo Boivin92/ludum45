@@ -1,6 +1,6 @@
 extends Node2D
 
-var skills = ["Programming", "Art works", "Script writing", "Feeding"]
+var skills = ["Programming", "Art works", "Script writing", "Feeding (thanks!)"]
 var progs = ["François Boivin","Cédric Pinard", "Mélanie Ellias"]
 var artists = ["Ariane Simard-Leduc", "Olivier Boily"]
 var script_writer = ["Marie-Pierre Bergeron"]
@@ -49,5 +49,5 @@ func set_current_names(currentSkill : String):
 			currentNamesToDisplay = artists
 		"Script writing":
 			currentNamesToDisplay = script_writer
-		"Feeding":
+		"Feeding (thanks!)":
 			currentNamesToDisplay = feeder
