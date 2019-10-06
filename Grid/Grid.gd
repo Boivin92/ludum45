@@ -1,5 +1,3 @@
-tool
-
 extends Node2D
 
 export(int, 3, 12) var height := 3
@@ -46,8 +44,15 @@ func try_swap(gem1, gem2) -> void:
 	actions_locked = true
 	$Tween.start()
 	yield($Tween, "tween_all_completed")
+	var match_info = MatchInfo.new()
+	match_gems(match_info)
+	if match_info.count == 0 and match_info.cascade == 0:
+		gem1.move_to(coords1, $Tween)
+		gem2.move_to(coords2, $Tween)
+		actions_locked = true
+		$Tween.start()
+		yield($Tween, "tween_all_completed")
 	actions_locked = false
-	match_gems(MatchInfo.new())
 
 
 func match_gems(match_info: MatchInfo) -> void:
@@ -111,13 +116,11 @@ func update_grid_contents(match_info: MatchInfo) -> void:
 	spawn_gems(spawn_counts, match_info)
 
 	# All required data computed, now to animate
-	actions_locked = true
 	$Tween.start()
 	yield($Tween, "tween_all_completed")
 	match_info.cascade += 1
 	match_info.clear_matches()
 	match_gems(match_info)
-	actions_locked = false
 
 
 func sort_update_order(gem1, gem2) -> bool:
@@ -128,7 +131,7 @@ func sort_update_order(gem1, gem2) -> bool:
 
 func spawn_gems(counts: Array, match_info: MatchInfo) -> void:
 	var total := 0
-	if match_info.count > 1 or match_info.cascade > 2:
+	if match_info.count > 1 or match_info.cascade > 1:
 		for count in counts:
 			total += count
 	for x in range(counts.size()):
@@ -195,14 +198,24 @@ func reset_grid():
 	update_grid_contents(MatchInfo.new())
 
 
-func _get_configuration_warning() -> String:
-	if puzzle_mode:
-		if not puzzle_data:
-			return "Grid set to puzzle mode does not have puzzle data"
-	return ""
-
 func matches_remaining() -> bool:
 	for gem in $GemContainer.get_children():
 		if gem.is_match_possible():
 			return true
 	return false
+
+
+func load_level(h: int, w: int, puzzle = null):
+	silent = true
+	for gem in $GemContainer.get_children():
+		gem.queue_free()
+	yield(get_tree(), "idle_frame")
+	height = h
+	width = w
+	puzzle_mode = puzzle != null
+	puzzle_data = puzzle
+	if puzzle_mode:
+		load_puzzle_data()
+		silent = false
+	else:
+		update_grid_contents(MatchInfo.new())
