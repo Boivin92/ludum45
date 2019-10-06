@@ -1,6 +1,6 @@
 class_name MatchInfo
 
-enum Types { Feather, Flower, Hourglass, Book, Gear }
+enum Types { None, Feather, Flower, Hourglass, Book, Gear }
 
 var count := 0
 var cascade := 0

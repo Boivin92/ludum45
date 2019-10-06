@@ -27,6 +27,9 @@ func set_highlight(highlighted: bool) -> void:
 
 
 func check_matches() -> bool:
+	if type == MatchInfo.Types.None:
+		return false
+
 	var is_match_center := false
 	var neighbour_up = $Offset/Area2D/RayCastUp.get_collider()
 	var neighbour_down = $Offset/Area2D/RayCastDown.get_collider()
