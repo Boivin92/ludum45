@@ -5,8 +5,7 @@ extends TextureRect
 #warning-ignore:unused_class_variable
 export(Vector2) var coords setget set_coords, get_coords
 
-enum Types { Feather, Flower, Hourglass, Book, Gear }
-export(Types) var type
+export(MatchInfo.Types) var type
 
 enum FallTypes { Regular, Spawn }
 

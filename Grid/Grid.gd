@@ -7,7 +7,6 @@ signal matched(match_info)
 signal level_completed
 
 const Gem = preload("res://Grid/Gem/Gem.tscn")
-enum Matches { Horizontal = 1, Vertical = 2}
 enum FallTypes { Regular, Spawn }
 const GemTextures = [
 		preload("res://Grid/Gem/Feather.tres"),
@@ -56,7 +55,7 @@ func match_gems(match_info: MatchInfo) -> void:
 	# Check for matched gems
 	for gem in $GemContainer.get_children():
 		if gem.check_matches():
-			match_info.count += 1
+			match_info.add_match(gem.type)
 
 	# Remove matched gems
 	for gem in $GemContainer.get_children():
@@ -105,7 +104,7 @@ func update_grid_contents(match_info: MatchInfo) -> void:
 	$Tween.start()
 	yield($Tween, "tween_all_completed")
 	match_info.cascade += 1
-	match_info.count = 0
+	match_info.clear_matches()
 	match_gems(match_info)
 	actions_locked = false
 
