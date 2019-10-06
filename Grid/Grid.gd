@@ -203,3 +203,19 @@ func matches_remaining() -> bool:
 		if gem.is_match_possible():
 			return true
 	return false
+
+
+func load_level(h: int, w: int, puzzle = null):
+	silent = true
+	for gem in $GemContainer.get_children():
+		gem.queue_free()
+	yield(get_tree(), "idle_frame")
+	height = h
+	width = w
+	puzzle_mode = puzzle != null
+	puzzle_data = puzzle
+	if puzzle_mode:
+		load_puzzle_data()
+		silent = false
+	else:
+		update_grid_contents(MatchInfo.new())
