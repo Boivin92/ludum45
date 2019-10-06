@@ -19,3 +19,7 @@ func _on_Grid_matched(match_info) -> void:
 		play_match()
 	else:
 		play_success()
+
+
+func _on_Grid_no_moves_left() -> void:
+	pass # Replace with function body.

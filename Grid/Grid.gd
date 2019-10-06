@@ -9,6 +9,7 @@ export(Resource) var puzzle_data
 
 signal matched(match_info)
 signal cascade_finished
+signal no_moves_left()
 
 const Gem = preload("res://Grid/Gem/Gem.tscn")
 enum FallTypes { Regular, Spawn }
@@ -76,7 +77,7 @@ func match_gems(match_info: MatchInfo) -> void:
 			emit_signal("cascade_finished")
 		silent = false
 		if not matches_remaining():
-			reset_grid()
+			emit_signal("no_moves_left")
 
 
 func update_grid_contents(match_info: MatchInfo) -> void:

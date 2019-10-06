@@ -455,3 +455,5 @@ autoplay = true
 [connection signal="matched" from="GameScreen/Grid" to="GameScreen/AudioStreamPlayer" method="_on_Grid_matched"]
 [connection signal="matched" from="GameScreen/Grid" to="." method="_on_Grid_matched"]
 [connection signal="matched" from="GameScreen/Grid" to="GameScreen/Node2D/BackgroundAnimation" method="_on_Grid_matched"]
+[connection signal="no_moves_left" from="GameScreen/Grid" to="GameScreen/AudioStreamPlayer" method="_on_Grid_no_moves_left"]
+[connection signal="no_moves_left" from="GameScreen/Grid" to="." method="_on_Grid_no_moves_left"]

@@ -48,3 +48,6 @@ func spawn_light_flare(number : int):
 		newFlare.set_wait(rand_range(0 , 1.5))
 		newFlare.color = colorGenerator.Generate()
 		$Lights.add_child(newFlare)
+
+func _on_Grid_no_moves_left() -> void:
+	$GameScreen/Grid.reset_grid()
