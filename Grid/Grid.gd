@@ -131,7 +131,7 @@ func sort_update_order(gem1, gem2) -> bool:
 
 func spawn_gems(counts: Array, match_info: MatchInfo) -> void:
 	var total := 0
-	if match_info.count > 1 or match_info.cascade > 1:
+	if silent and (match_info.count > 1 or match_info.cascade > 1):
 		for count in counts:
 			total += count
 	for x in range(counts.size()):
