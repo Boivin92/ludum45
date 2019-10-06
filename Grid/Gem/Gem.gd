@@ -80,3 +80,23 @@ func set_fall(distance: int, fall_type: int, tween: Tween) -> void:
 func _gui_input(event: InputEvent) -> void:
 	if event.is_action_released("ui_select"):
 		emit_signal("gem_selected", self)
+		
+		
+		
+		
+onready var patterns = [[$Offset/Area2D/RayCastDown, $Offset/Area2D/RayCastUpLeft, $Offset/Area2D/RayCastUpRight],
+						[$Offset/Area2D/RayCastUp, $Offset/Area2D/RayCastDownLeft, $Offset/Area2D/RayCastDownRight],
+						[$Offset/Area2D/RayCastLeft, $Offset/Area2D/RayCastUpRight, $Offset/Area2D/RayCastDownRight],
+						[$Offset/Area2D/RayCastRight, $Offset/Area2D/RayCastUpLeft, $Offset/Area2D/RayCastDownLeft],]
+						
+func is_match_possible() -> bool:
+	for pattern in patterns:
+		var matching_type_counter = 0
+		for raycast in pattern:
+			var collision = raycast.get_collider()
+			if collision:
+				if collision.find_parent("Gem*").type == self.type:
+					matching_type_counter += 1
+		if matching_type_counter >= 2:
+			return true
+	return false

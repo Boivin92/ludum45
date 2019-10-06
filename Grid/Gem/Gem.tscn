@@ -48,3 +48,27 @@ enabled = true
 cast_to = Vector2( 128, 0 )
 collide_with_areas = true
 collide_with_bodies = false
+
+[node name="RayCastDownRight" type="RayCast2D" parent="Offset/Area2D"]
+enabled = true
+cast_to = Vector2( 128, 128 )
+collide_with_areas = true
+collide_with_bodies = false
+
+[node name="RayCastUpRight" type="RayCast2D" parent="Offset/Area2D"]
+enabled = true
+cast_to = Vector2( 128, -128 )
+collide_with_areas = true
+collide_with_bodies = false
+
+[node name="RayCastDownLeft" type="RayCast2D" parent="Offset/Area2D"]
+enabled = true
+cast_to = Vector2( -128, 128 )
+collide_with_areas = true
+collide_with_bodies = false
+
+[node name="RayCastUpLeft" type="RayCast2D" parent="Offset/Area2D"]
+enabled = true
+cast_to = Vector2( -128, -128 )
+collide_with_areas = true
+collide_with_bodies = false
