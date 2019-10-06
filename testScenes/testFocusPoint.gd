@@ -58,3 +58,8 @@ func _on_Grid_no_moves_left() -> void:
 
 func _on_Game_transition_completed() -> void:
 	get_tree().change_scene("res://Scenes/Credits.tscn")
+
+
+func _on_RetourAccueil_pressed() -> void:
+	get_tree().change_scene("res://Scenes/EcranAccueil.tscn")
+	pass 
