@@ -1,65 +1,54 @@
-[gd_scene load_steps=10 format=2]
+[gd_scene load_steps=13 format=2]
 
 [ext_resource path="res://Scripts/Credits.gd" type="Script" id=1]
 [ext_resource path="res://Arts/luneAqua.png" type="Texture" id=2]
-[ext_resource path="res://Arts/luneTxtre.png" type="Texture" id=3]
-[ext_resource path="res://Fonts/MorrisRoman-Black.ttf" type="DynamicFontData" id=4]
-[ext_resource path="res://Scenes/Label.gd" type="Script" id=5]
-[ext_resource path="res://Arts/BackButton.png" type="Texture" id=6]
+[ext_resource path="res://Arts/TexturePapierAquarelle.png" type="Texture" id=3]
+[ext_resource path="res://Scenes/Credits.gd" type="Script" id=4]
+[ext_resource path="res://Fonts/MorrisRoman-Black.ttf" type="DynamicFontData" id=5]
+[ext_resource path="res://Scenes/Names.gd" type="Script" id=6]
+[ext_resource path="res://Arts/BackButton.png" type="Texture" id=7]
+[ext_resource path="res://Arts/BackButtonhighlight.png" type="Texture" id=8]
 
-[sub_resource type="GDScript" id=1]
-script/source = "extends Node2D
+[sub_resource type="DynamicFont" id=4]
+size = 50
+font_data = ExtResource( 5 )
 
-var skills = [\"Programming\", \"Art works\",\"Scenario\", \"Feeding\"]
-var names = [\"François Boivin\", \"Ariane Simard-Leduc\", \"Marie-Pierre Bergeron\", \"Olivier Boily\", \"Cédric Pinard\", \"Mélanie Ellias\"]
-var counter = 0
+[sub_resource type="DynamicFont" id=1]
+size = 50
+font_data = ExtResource( 5 )
 
-func _ready() -> void:
-	pass
-	
-func next_credits():
-	if (counter < names.size()):
-		$Label.text = names[counter]
-		counter += 1
-	else:
-		counter = 0
-	
-"
-
-[sub_resource type="DynamicFont" id=2]
-size = 30
-font_data = ExtResource( 4 )
-
-[sub_resource type="Animation" id=3]
+[sub_resource type="Animation" id=2]
 resource_name = "fade"
-length = 3.0
-loop = true
+length = 4.0
 tracks/0/type = "value"
-tracks/0/path = NodePath("Label:modulate")
+tracks/0/path = NodePath("Names:modulate")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/imported = false
 tracks/0/enabled = true
 tracks/0/keys = {
-"times": PoolRealArray( 0, 3 ),
-"transitions": PoolRealArray( 1, -2 ),
+"times": PoolRealArray( 0, 2.4, 3.9 ),
+"transitions": PoolRealArray( 1, -2, 1 ),
 "update": 0,
-"values": [ Color( 1, 1, 1, 0 ), Color( 1, 1, 1, 1 ) ]
+"values": [ Color( 1, 1, 1, 0 ), Color( 1, 1, 1, 1 ), Color( 1, 1, 1, 0 ) ]
 }
 tracks/1/type = "method"
-tracks/1/path = NodePath("Label")
+tracks/1/path = NodePath("Names")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/imported = false
-tracks/1/enabled = true
+tracks/1/enabled = false
 tracks/1/keys = {
 "times": PoolRealArray( 0 ),
 "transitions": PoolRealArray( 1 ),
 "values": [ {
-"args": [  ],
-"method": "next_credits"
+"args": [ null ],
+"method": "_next_name"
 } ]
 }
+
+[sub_resource type="CanvasItemMaterial" id=3]
+light_mode = 1
 
 [node name="Credits" type="Node"]
 script = ExtResource( 1 )
@@ -67,9 +56,9 @@ script = ExtResource( 1 )
 [node name="HBoxContainer" type="HBoxContainer" parent="."]
 anchor_right = 1.0
 anchor_bottom = 1.0
-margin_left = 2.51758
+margin_left = 8.39038
 margin_top = -2.51752
-margin_right = 2.51758
+margin_right = 8.39038
 margin_bottom = -2.51752
 
 [node name="Tapisserie" type="Node2D" parent="HBoxContainer"]
@@ -100,35 +89,64 @@ __meta__ = {
 
 [node name="Credits" type="Node2D" parent="ScrollCredits"]
 position = Vector2( -990.145, 900 )
-script = SubResource( 1 )
+script = ExtResource( 4 )
 
-[node name="Label" type="Label" parent="ScrollCredits/Credits"]
-modulate = Color( 1, 1, 1, 0.442408 )
-anchor_left = 1.0
+[node name="Skills" type="Label" parent="ScrollCredits/Credits"]
 anchor_right = 1.0
 anchor_bottom = 1.0
-margin_left = 993.162
-margin_top = -901.452
-margin_right = 1587.16
-margin_bottom = -22.4515
-custom_fonts/font = SubResource( 2 )
+margin_left = 998.0
+margin_top = -895.0
+margin_right = 1588.0
+margin_bottom = -595.0
+rect_min_size = Vector2( 80, 80 )
+size_flags_horizontal = 3
+custom_fonts/font = SubResource( 4 )
+custom_colors/font_color = Color( 0.384314, 0.25098, 0.176471, 1 )
+text = "Skills"
+align = 1
+valign = 2
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="Names" type="Label" parent="ScrollCredits/Credits"]
+modulate = Color( 1, 1, 1, 0 )
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = 994.0
+margin_top = -592.0
+margin_right = 1585.0
+margin_bottom = -415.0
+size_flags_horizontal = 3
+custom_fonts/font = SubResource( 1 )
+custom_colors/font_color = Color( 0.384314, 0.25098, 0.176471, 1 )
 custom_colors/font_outline_modulate = Color( 0, 0, 0, 0 )
-text = "HI! jhsgffggtttfd"
+text = "HI! "
 align = 1
 valign = 1
 autowrap = true
-script = ExtResource( 5 )
+script = ExtResource( 6 )
+__meta__ = {
+"_edit_lock_": true
+}
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="ScrollCredits/Credits"]
 autoplay = "fade"
-anims/fade = SubResource( 3 )
+anims/fade = SubResource( 2 )
 
 [node name="RetourAccueil" type="TextureButton" parent="."]
+modulate = Color( 1, 1, 1, 0.894118 )
+material = SubResource( 3 )
 margin_left = 1311.44
 margin_top = 695.361
 margin_right = 1591.44
 margin_bottom = 956.361
 rect_min_size = Vector2( 244, 108 )
-texture_normal = ExtResource( 6 )
+size_flags_vertical = 3
+texture_normal = ExtResource( 7 )
+texture_hover = ExtResource( 8 )
 expand = true
+[connection signal="animation_finished" from="ScrollCredits/Credits/AnimationPlayer" to="ScrollCredits/Credits" method="_on_AnimationPlayer_animation_finished"]
 [connection signal="pressed" from="RetourAccueil" to="." method="_on_RetourAccueil_pressed"]
