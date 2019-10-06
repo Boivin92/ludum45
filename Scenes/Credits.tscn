@@ -1,25 +1,24 @@
 [gd_scene load_steps=13 format=2]
 
 [ext_resource path="res://Scripts/Credits.gd" type="Script" id=1]
-[ext_resource path="res://Arts/luneAqua.png" type="Texture" id=2]
-[ext_resource path="res://Arts/TexturePapierAquarelle.png" type="Texture" id=3]
+[ext_resource path="res://Arts/TexturePapierAquarelle.png" type="Texture" id=2]
+[ext_resource path="res://Scenes/ScrollTapisserie.tscn" type="PackedScene" id=3]
 [ext_resource path="res://Scenes/Credits.gd" type="Script" id=4]
 [ext_resource path="res://Fonts/MorrisRoman-Black.ttf" type="DynamicFontData" id=5]
 [ext_resource path="res://Scenes/Names.gd" type="Script" id=6]
 [ext_resource path="res://Arts/BackButton.png" type="Texture" id=7]
 [ext_resource path="res://Arts/BackButtonhighlight.png" type="Texture" id=8]
 
-[sub_resource type="DynamicFont" id=4]
-size = 50
-font_data = ExtResource( 5 )
-
 [sub_resource type="DynamicFont" id=1]
 size = 50
 font_data = ExtResource( 5 )
 
-[sub_resource type="Animation" id=2]
-resource_name = "fade"
-length = 4.0
+[sub_resource type="DynamicFont" id=2]
+size = 50
+font_data = ExtResource( 5 )
+
+[sub_resource type="Animation" id=3]
+length = 4.5
 tracks/0/type = "value"
 tracks/0/path = NodePath("Names:modulate")
 tracks/0/interp = 1
@@ -27,8 +26,8 @@ tracks/0/loop_wrap = true
 tracks/0/imported = false
 tracks/0/enabled = true
 tracks/0/keys = {
-"times": PoolRealArray( 0, 2.4, 3.9 ),
-"transitions": PoolRealArray( 1, -2, 1 ),
+"times": PoolRealArray( 0, 2.4, 4.4 ),
+"transitions": PoolRealArray( 1, -1.56917, 1 ),
 "update": 0,
 "values": [ Color( 1, 1, 1, 0 ), Color( 1, 1, 1, 1 ), Color( 1, 1, 1, 0 ) ]
 }
@@ -47,7 +46,7 @@ tracks/1/keys = {
 } ]
 }
 
-[sub_resource type="CanvasItemMaterial" id=3]
+[sub_resource type="CanvasItemMaterial" id=4]
 light_mode = 1
 
 [node name="Credits" type="Node"]
@@ -56,71 +55,58 @@ script = ExtResource( 1 )
 [node name="HBoxContainer" type="HBoxContainer" parent="."]
 anchor_right = 1.0
 anchor_bottom = 1.0
-margin_left = 8.39038
-margin_top = -2.51752
-margin_right = 8.39038
-margin_bottom = -2.51752
+margin_left = 2.51782
+margin_top = 3.35516
+margin_right = 2.51782
+margin_bottom = 3.35516
 
-[node name="Tapisserie" type="Node2D" parent="HBoxContainer"]
-__meta__ = {
-"_edit_lock_": true
-}
+[node name="TextureRect" type="TextureRect" parent="HBoxContainer"]
+margin_right = 1024.0
+margin_bottom = 1024.0
+texture = ExtResource( 2 )
 
-[node name="ScrollStory" type="TextureRect" parent="HBoxContainer/Tapisserie"]
-margin_left = -4.16132
-margin_top = 7.05548
-margin_right = 995.839
-margin_bottom = 907.055
-rect_min_size = Vector2( 1000, 0 )
+[node name="ScrollTapisserie" parent="HBoxContainer" instance=ExtResource( 3 )]
+position = Vector2( 648.927, -17.6179 )
+
+[node name="Credits" type="Node2D" parent="HBoxContainer"]
+position = Vector2( -998.535, 902.518 )
+script = ExtResource( 4 )
+
+[node name="TextureRect" type="TextureRect" parent="HBoxContainer/Credits"]
+margin_left = 2013.57
+margin_top = -904.79
+margin_right = 2820.57
+margin_bottom = 119.21
 texture = ExtResource( 2 )
 expand = true
 
-[node name="ScrollCredits" type="TextureRect" parent="."]
-margin_left = 994.928
-margin_right = 1594.93
-margin_bottom = 900.0
-rect_min_size = Vector2( 600, 800 )
-size_flags_vertical = 3
-texture = ExtResource( 3 )
-expand = true
-__meta__ = {
-"_edit_lock_": true
-}
-
-[node name="Credits" type="Node2D" parent="ScrollCredits"]
-position = Vector2( -990.145, 900 )
-script = ExtResource( 4 )
-
-[node name="Skills" type="Label" parent="ScrollCredits/Credits"]
+[node name="Skills" type="Label" parent="HBoxContainer/Credits"]
 anchor_right = 1.0
 anchor_bottom = 1.0
-margin_left = 998.0
-margin_top = -895.0
-margin_right = 1588.0
-margin_bottom = -595.0
+margin_left = 1996.35
+margin_top = -903.809
+margin_right = 2586.35
+margin_bottom = -603.809
 rect_min_size = Vector2( 80, 80 )
 size_flags_horizontal = 3
-custom_fonts/font = SubResource( 4 )
+custom_fonts/font = SubResource( 1 )
 custom_colors/font_color = Color( 0.384314, 0.25098, 0.176471, 1 )
 text = "Skills"
 align = 1
 valign = 2
-__meta__ = {
-"_edit_lock_": true
-}
 
-[node name="Names" type="Label" parent="ScrollCredits/Credits"]
+[node name="Names" type="Label" parent="HBoxContainer/Credits"]
 modulate = Color( 1, 1, 1, 0 )
 anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-margin_left = 994.0
-margin_top = -592.0
-margin_right = 1585.0
-margin_bottom = -415.0
+margin_left = 1995.29
+margin_top = -627.236
+margin_right = 2586.29
+margin_bottom = -450.236
 size_flags_horizontal = 3
-custom_fonts/font = SubResource( 1 )
+custom_fonts/font = SubResource( 2 )
 custom_colors/font_color = Color( 0.384314, 0.25098, 0.176471, 1 )
 custom_colors/font_outline_modulate = Color( 0, 0, 0, 0 )
 text = "HI! "
@@ -128,17 +114,14 @@ align = 1
 valign = 1
 autowrap = true
 script = ExtResource( 6 )
-__meta__ = {
-"_edit_lock_": true
-}
 
-[node name="AnimationPlayer" type="AnimationPlayer" parent="ScrollCredits/Credits"]
+[node name="AnimationPlayer" type="AnimationPlayer" parent="HBoxContainer/Credits"]
 autoplay = "fade"
-anims/fade = SubResource( 2 )
+anims/fade = SubResource( 3 )
 
 [node name="RetourAccueil" type="TextureButton" parent="."]
 modulate = Color( 1, 1, 1, 0.894118 )
-material = SubResource( 3 )
+material = SubResource( 4 )
 margin_left = 1311.44
 margin_top = 695.361
 margin_right = 1591.44
@@ -148,5 +131,5 @@ size_flags_vertical = 3
 texture_normal = ExtResource( 7 )
 texture_hover = ExtResource( 8 )
 expand = true
-[connection signal="animation_finished" from="ScrollCredits/Credits/AnimationPlayer" to="ScrollCredits/Credits" method="_on_AnimationPlayer_animation_finished"]
+[connection signal="animation_finished" from="HBoxContainer/Credits/AnimationPlayer" to="HBoxContainer/Credits" method="_on_AnimationPlayer_animation_finished"]
 [connection signal="pressed" from="RetourAccueil" to="." method="_on_RetourAccueil_pressed"]
