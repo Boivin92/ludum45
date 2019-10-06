@@ -421,7 +421,6 @@ script = ExtResource( 7 )
 [node name="DialogBox" parent="." instance=ExtResource( 8 )]
 modulate = Color( 1, 1, 1, 0 )
 custom_fonts/mono_font = SubResource( 5 )
-custom_colors/default_color = Color( 0.384314, 0.25098, 0.176471, 1 )
 visible_characters = 0
 percent_visible = 0.0
 
@@ -454,5 +453,5 @@ autoplay = true
 [connection signal="animation_finished" from="GameScreen/Node2D/BackgroundAnimation" to="GameScreen/Node2D/BackgroundAnimation" method="_on_BackgroundAnimation_animation_finished"]
 [connection signal="cascade_finished" from="GameScreen/Grid" to="." method="_on_Grid_cascade_finished"]
 [connection signal="matched" from="GameScreen/Grid" to="GameScreen/AudioStreamPlayer" method="_on_Grid_matched"]
-[connection signal="matched" from="GameScreen/Grid" to="GameScreen/Node2D/BackgroundAnimation" method="_on_Grid_matched"]
 [connection signal="matched" from="GameScreen/Grid" to="." method="_on_Grid_matched"]
+[connection signal="matched" from="GameScreen/Grid" to="GameScreen/Node2D/BackgroundAnimation" method="_on_Grid_matched"]

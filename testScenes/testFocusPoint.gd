@@ -5,6 +5,7 @@ signal transition_completed()
 var must_transition := false
 var step : int = 0
 export(PackedScene) var flareScene
+var colorGenerator = RandomColorGenerator.new()
 
 func _ready() -> void:
 	$DialogBox.text = poems[step]
@@ -45,4 +46,5 @@ func spawn_light_flare(number : int):
 		var newFlare = flareScene.instance()
 		newFlare.position = Vector2(posX, posY)
 		newFlare.set_wait(rand_range(0 , 1.5))
+		newFlare.color = colorGenerator.Generate()
 		$Lights.add_child(newFlare)
