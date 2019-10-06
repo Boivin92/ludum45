@@ -131,13 +131,13 @@ func sort_update_order(gem1, gem2) -> bool:
 
 func spawn_gems(counts: Array, match_info: MatchInfo) -> void:
 	var total := 0
-	if silent and (match_info.count > 1 or match_info.cascade > 1):
+	if not silent and (match_info.count > 1 or match_info.cascade > 1):
 		for count in counts:
 			total += count
 	for x in range(counts.size()):
 		for y in range(-1, -counts[x] - 1, -1):
 			var type := -1
-			if total > 0 and floor(rand_range(0, total)):
+			if total > 0 and floor(rand_range(0, total)) == 0:
 				type = MatchInfo.Types.Gear
 				total = 0
 			spawn_gem_at(Vector2(x, y), counts[x], type)
