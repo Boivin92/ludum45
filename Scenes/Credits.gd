@@ -1,6 +1,6 @@
 extends Node2D
 
-var skills = ["Programming", "Art works", "Script writing", "Feeding (thanks!)"]
+var skills = ["Programming", "Art works", "Script writing", "Cooking (thanks!)"]
 var progs = ["François Boivin","Cédric Pinard", "Mélanie Ellias"]
 var artists = ["Ariane Simard-Leduc", "Olivier Boily"]
 var script_writer = ["Marie-Pierre Bergeron"]

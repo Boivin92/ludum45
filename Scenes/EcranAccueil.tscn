@@ -38,4 +38,4 @@ rect_min_size = Vector2( 244, 108 )
 texture_normal = ExtResource( 5 )
 texture_hover = ExtResource( 6 )
 [connection signal="pressed" from="StartGame" to="." method="_on_StartGame_pressed"]
-[connection signal="pressed" from="Infos" to="." method="_on_StartGame_pressed"]
+[connection signal="pressed" from="Infos" to="." method="_on_Infos_pressed"]

@@ -1,0 +1,64 @@
+[gd_scene load_steps=8 format=2]
+
+[ext_resource path="res://Scenes/HowTo.gd" type="Script" id=1]
+[ext_resource path="res://Arts/TexturePapierAquarelle.png" type="Texture" id=2]
+[ext_resource path="res://Fonts/MorrisRoman-Black.ttf" type="DynamicFontData" id=3]
+[ext_resource path="res://Arts/BackButton.png" type="Texture" id=4]
+[ext_resource path="res://Arts/BackButtonhighlight.png" type="Texture" id=5]
+
+[sub_resource type="DynamicFont" id=1]
+size = 50
+font_data = ExtResource( 3 )
+
+[sub_resource type="CanvasItemMaterial" id=4]
+light_mode = 1
+
+[node name="HowTo" type="Control"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+script = ExtResource( 1 )
+
+[node name="TextureRect" type="TextureRect" parent="."]
+anchor_right = 1.0
+anchor_bottom = 1.0
+texture = ExtResource( 2 )
+expand = true
+
+[node name="Label" type="Label" parent="."]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -488.5
+margin_top = -450.0
+margin_right = 488.5
+margin_bottom = 450.0
+custom_fonts/font = SubResource( 1 )
+custom_colors/font_color = Color( 0.384314, 0.25098, 0.176471, 1 )
+text = "                    How To Play
+
+In this game, you have to match symbols together.
+
+There 5 different types of symbols : 
+Feather, Book, Hourglass, Flower and Gear.
+
+Three matched symbols disappear.
+Four matched symbols generate a Gear.
+
+Match 3 Gears to progress the story.
+"
+valign = 1
+
+[node name="RetourAccueil" type="TextureButton" parent="."]
+modulate = Color( 1, 1, 1, 0.894118 )
+material = SubResource( 4 )
+margin_left = 1311.44
+margin_top = 695.361
+margin_right = 1591.44
+margin_bottom = 956.361
+rect_min_size = Vector2( 244, 108 )
+size_flags_vertical = 3
+texture_normal = ExtResource( 4 )
+texture_hover = ExtResource( 5 )
+expand = true
+[connection signal="pressed" from="RetourAccueil" to="." method="_on_RetourAccueil_pressed"]
