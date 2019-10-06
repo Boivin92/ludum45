@@ -712,6 +712,7 @@ script = ExtResource( 34 )
 
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="GameScreen"]
 stream = ExtResource( 36 )
+volume_db = -10.196
 script = ExtResource( 37 )
 regular = ExtResource( 36 )
 success = ExtResource( 38 )

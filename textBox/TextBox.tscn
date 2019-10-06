@@ -8,11 +8,11 @@ size = 24
 font_data = ExtResource( 1 )
 
 [node name="DialogBox" type="RichTextLabel"]
-margin_left = -225.0
+margin_left = -300.0
 margin_top = -225.0
-margin_right = 225.0
+margin_right = 300.0
 margin_bottom = 225.0
-rect_pivot_offset = Vector2( 225, 225 )
+rect_pivot_offset = Vector2( -300, 225 )
 custom_fonts/mono_font = SubResource( 1 )
 custom_fonts/bold_italics_font = SubResource( 1 )
 custom_fonts/italics_font = SubResource( 1 )
