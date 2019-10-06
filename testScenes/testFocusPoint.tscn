@@ -615,32 +615,29 @@ It began wandering.", "Dragged by the sound of a crying child,
 The shadow appeared near a hollow house.
 
 A little basket was whimpering as loud as it could,
-In front of the orphanage door.
+In front of an orphanage door.
 
-The baby has grown into a cunning young girl,
-Pushed by her curiosity, wits and creativity.
-", "The young girl evolved from an orphan to a prodigy,
+The baby grew into a cunning young girl,
+Pushed by her curiosity, wits and creativity.", "The young girl evolved from an orphan to a prodigy,
 And tried to make her dreams reality.
 
 Researching and studying night and day,
 She managed to find a way.
 
 After so many years of drawing and calculating,
-Her path was now clear and the plan was set.
+The path was clear  and her plan was set
 
 After so many drawings and calculations,
-Her path now clear, she needed to shape her vision.", "The young woman found an abandoned factory,
+She shaped her vision, advancing foward.", "The young woman found an abandoned factory,
 Remodeled it to be her own laboratory.
 
 Armed with gears, tools, junks and willingness,
-She began crafting what had once been an idea.
-ambition, aspiration, goal
+She began crafting her ambition.
 
 Finally, after an uncalculated number of hours and days,
 She achieved the creation of her long waited invention...
 
-[center]A rocket.[/center]
-", "She jumped into what would be her freedom,
+[center]A rocket.[/center]", "Penelope jumped into what would be her freedom,
 Buckled her belt and started the engines.
 
 After one last glance at the workshop,
@@ -649,11 +646,10 @@ She launched into the sky and stars without regret.
 Fearless towards her destination,
 She set sail on her journey.
 
-Traveling into through towards the light,
+Traveling through light and space,
 She finally landed at her destination...
 
-[center]The moon.[/center]
-", "" ]
+[center]The moon.[/center]", "" ]
 
 [node name="background" type="Sprite" parent="."]
 position = Vector2( -512.177, -16.6616 )
