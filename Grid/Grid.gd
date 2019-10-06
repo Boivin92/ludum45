@@ -82,26 +82,30 @@ func update_grid_contents(match_info: MatchInfo) -> void:
 	var gems = $GemContainer.get_children()
 	gems.sort_custom(self, "sort_update_order")
 	var column := 0
-	var gem_column_count := 0
+	var last_gem_count := 0
+	var spawn_counts := []
 
 	# General algorithm
 	for gem in gems:
 		if gem.coords.x != column:
-			# Spawn gems for previous column
-			spawn_column_gems(column, height - gem_column_count)
-			# Spawn gems for any skipped column
-			for col in range(column + 1, gem.coords.x):
-				spawn_column_gems(col, height)
+			# Spawn count for previous column
+			spawn_counts.push_back(height - last_gem_count)
+			# Spawn counts for any skipped column
+			for _col in range(column + 1, gem.coords.x):
+				spawn_counts.push_back(height)
 			# Reset fall logic data for new column
 			column = gem.coords.x
-			gem_column_count = 0
-		gem_column_count += 1
-		gem.set_fall(height - gem_column_count - gem.coords.y, FallTypes.Regular, $Tween)
+			last_gem_count = 0
+		last_gem_count += 1
+		gem.set_fall(height - last_gem_count - gem.coords.y, FallTypes.Regular, $Tween)
 
-	# Repeat spawn logic for empty last column(s)
-	spawn_column_gems(column, height - gem_column_count)
-	for col in range(column + 1, width):
-		spawn_column_gems(col, height)
+	# Spawn count for last column(s)
+	spawn_counts.push_back(height - last_gem_count)
+	for _col in range(column + 1, width):
+		spawn_counts.push_back(height)
+
+	# Spawn required gems
+	spawn_gems(spawn_counts, match_info)
 
 	# All required data computed, now to animate
 	actions_locked = true
@@ -119,9 +123,19 @@ func sort_update_order(gem1, gem2) -> bool:
 	return gem1.coords.x < gem2.coords.x
 
 
-func spawn_column_gems(column: int, fall_distance: int) -> void:
-	for y in range(-1, -1 - fall_distance, -1):
-		spawn_gem_at(Vector2(column, y), fall_distance)
+func spawn_gems(counts: Array, match_info: MatchInfo) -> void:
+	var total := 0
+	if match_info.count > 1 or match_info.cascade > 2:
+		for count in counts:
+			total += count
+	for x in range(counts.size()):
+		for y in range(-1, -counts[x] - 1, -1):
+			var type := -1
+			if total > 0 and floor(rand_range(0, total)):
+				type = MatchInfo.Types.Gear
+				total = 0
+			spawn_gem_at(Vector2(x, y), counts[x], type)
+			total -= 1
 
 
 func spawn_gem_at(coord: Vector2, fall_distance: int, type: int = -1):
