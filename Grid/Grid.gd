@@ -44,7 +44,7 @@ func try_swap(gem1, gem2) -> void:
 	gem2.move_to(coords1, $Tween)
 	actions_locked = true
 	$Tween.start()
-	yield($Tween, "tween_all_completed")
+	yield($Tween, "tween_completed")
 	var match_info = MatchInfo.new()
 	match_gems(match_info)
 	if match_info.count == 0 and match_info.cascade == 0:
@@ -52,7 +52,7 @@ func try_swap(gem1, gem2) -> void:
 		gem2.move_to(coords2, $Tween)
 		actions_locked = true
 		$Tween.start()
-		yield($Tween, "tween_all_completed")
+		yield($Tween, "tween_completed")
 	actions_locked = false
 
 
@@ -70,12 +70,12 @@ func match_gems(match_info: MatchInfo) -> void:
 				gem.texture = GemTextures[0]
 			else:
 				gem.queue_free()
+	yield(get_tree(), "idle_frame")
 
 	# Update remaining grid contents
 	if match_info.count > 0:
 		if not silent:
 			emit_signal("matched", match_info)
-		yield(get_tree(), "idle_frame")
 		update_grid_contents(match_info)
 	else:
 		# Has to be here because of all the yield()-ing
@@ -118,7 +118,7 @@ func update_grid_contents(match_info: MatchInfo) -> void:
 
 	# All required data computed, now to animate
 	$Tween.start()
-	yield($Tween, "tween_all_completed")
+	yield($Tween, "tween_completed")
 	match_info.cascade += 1
 	match_info.clear_matches()
 	match_gems(match_info)
