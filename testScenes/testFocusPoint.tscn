@@ -1,19 +1,44 @@
-[gd_scene load_steps=20 format=2]
+[gd_scene load_steps=46 format=2]
 
 [ext_resource path="res://testScenes/testFocusPoint.gd" type="Script" id=1]
-[ext_resource path="res://Arts/TexturePapierAquarelle.png" type="Texture" id=2]
-[ext_resource path="res://tapisserie/Tapisserie.tscn" type="PackedScene" id=3]
-[ext_resource path="res://tapisserie/FocusPoint.tscn" type="PackedScene" id=4]
-[ext_resource path="res://Arts/baniere3.png" type="Texture" id=5]
-[ext_resource path="res://testScenes/AnimationPlayer.gd" type="Script" id=6]
-[ext_resource path="res://textBox/TextBox.tscn" type="PackedScene" id=7]
-[ext_resource path="res://Fonts/MorrisRoman-Black.ttf" type="DynamicFontData" id=8]
-[ext_resource path="res://testScenes/GameScreen.gd" type="Script" id=9]
-[ext_resource path="res://Grid/Grid.tscn" type="PackedScene" id=10]
-[ext_resource path="res://testScenes/AudioStreamPlayer.gd" type="Script" id=11]
-[ext_resource path="res://sounds/Select4.ogg" type="AudioStream" id=12]
-[ext_resource path="res://sounds/LevelUp3.ogg" type="AudioStream" id=13]
-[ext_resource path="res://sounds/music_harp_peaceful_loop.wav" type="AudioStream" id=14]
+[ext_resource path="res://LightFlare.tscn" type="PackedScene" id=2]
+[ext_resource path="res://Arts/TexturePapierAquarelle.png" type="Texture" id=3]
+[ext_resource path="res://tapisserie/Tapisserie.tscn" type="PackedScene" id=4]
+[ext_resource path="res://tapisserie/FocusPoint.tscn" type="PackedScene" id=5]
+[ext_resource path="res://Arts/baniere3.png" type="Texture" id=6]
+[ext_resource path="res://testScenes/AnimationPlayer.gd" type="Script" id=7]
+[ext_resource path="res://textBox/TextBox.tscn" type="PackedScene" id=8]
+[ext_resource path="res://Fonts/MorrisRoman-Black.ttf" type="DynamicFontData" id=9]
+[ext_resource path="res://testScenes/GameScreen.gd" type="Script" id=10]
+[ext_resource path="res://Arts/animation/1.png" type="Texture" id=11]
+[ext_resource path="res://Arts/animation/2.png" type="Texture" id=12]
+[ext_resource path="res://Arts/animation/3.png" type="Texture" id=13]
+[ext_resource path="res://Arts/animation/4.png" type="Texture" id=14]
+[ext_resource path="res://Arts/animation/5.png" type="Texture" id=15]
+[ext_resource path="res://Arts/animation/6.png" type="Texture" id=16]
+[ext_resource path="res://Arts/animation/7.png" type="Texture" id=17]
+[ext_resource path="res://Arts/animation/8.png" type="Texture" id=18]
+[ext_resource path="res://Arts/animation/9.png" type="Texture" id=19]
+[ext_resource path="res://Arts/animation/10.png" type="Texture" id=20]
+[ext_resource path="res://Arts/animation/11.png" type="Texture" id=21]
+[ext_resource path="res://Arts/animation/12.png" type="Texture" id=22]
+[ext_resource path="res://Arts/animation/13.png" type="Texture" id=23]
+[ext_resource path="res://Arts/animation/14.png" type="Texture" id=24]
+[ext_resource path="res://Arts/animation/15.png" type="Texture" id=25]
+[ext_resource path="res://Arts/animation/16.png" type="Texture" id=26]
+[ext_resource path="res://Arts/animation/17.png" type="Texture" id=27]
+[ext_resource path="res://Arts/animation/18.png" type="Texture" id=28]
+[ext_resource path="res://Arts/animation/19.png" type="Texture" id=29]
+[ext_resource path="res://Arts/animation/20.png" type="Texture" id=30]
+[ext_resource path="res://Arts/animation/21.png" type="Texture" id=31]
+[ext_resource path="res://Arts/animation/22.png" type="Texture" id=32]
+[ext_resource path="res://Arts/animation/23.png" type="Texture" id=33]
+[ext_resource path="res://testScenes/BackgroundAnimation.gd" type="Script" id=34]
+[ext_resource path="res://Grid/Grid.tscn" type="PackedScene" id=35]
+[ext_resource path="res://testScenes/AudioStreamPlayer.gd" type="Script" id=36]
+[ext_resource path="res://sounds/Select4.ogg" type="AudioStream" id=37]
+[ext_resource path="res://sounds/LevelUp3.ogg" type="AudioStream" id=38]
+[ext_resource path="res://sounds/music_harp_peaceful_loop.wav" type="AudioStream" id=39]
 
 [sub_resource type="Animation" id=1]
 resource_name = "transition1"
@@ -317,10 +342,19 @@ tracks/5/keys = {
 
 [sub_resource type="DynamicFont" id=5]
 size = 22
-font_data = ExtResource( 8 )
+font_data = ExtResource( 9 )
+
+[sub_resource type="SpriteFrames" id=6]
+animations = [ {
+"frames": [ ExtResource( 11 ), ExtResource( 12 ), ExtResource( 13 ), ExtResource( 14 ), ExtResource( 15 ), ExtResource( 16 ), ExtResource( 17 ), ExtResource( 18 ), ExtResource( 19 ), ExtResource( 20 ), ExtResource( 21 ), ExtResource( 22 ), ExtResource( 23 ), ExtResource( 24 ), ExtResource( 25 ), ExtResource( 26 ), ExtResource( 27 ), ExtResource( 28 ), ExtResource( 29 ), ExtResource( 30 ), ExtResource( 31 ), ExtResource( 32 ), ExtResource( 33 ) ],
+"loop": false,
+"name": "default",
+"speed": 15.0
+} ]
 
 [node name="Game" type="Node2D"]
 script = ExtResource( 1 )
+flareScene = ExtResource( 2 )
 poems = [ "", "[center]Somewhere between here and nothingness[/center]
 A shadow appeared in the void
 
@@ -356,35 +390,35 @@ She began crafting what had once just been an idea" ]
 
 [node name="background" type="Sprite" parent="."]
 position = Vector2( -512.177, -16.6616 )
-texture = ExtResource( 2 )
+texture = ExtResource( 3 )
 
 [node name="background2" type="Sprite" parent="."]
 position = Vector2( 511.672, -16.6642 )
-texture = ExtResource( 2 )
+texture = ExtResource( 3 )
 
-[node name="Tapisserie" parent="." instance=ExtResource( 3 )]
+[node name="Tapisserie" parent="." instance=ExtResource( 4 )]
 
-[node name="FocusPoint" parent="." instance=ExtResource( 4 )]
+[node name="FocusPoint" parent="." instance=ExtResource( 5 )]
 position = Vector2( -3.95053, 0.154175 )
 
 [node name="TopBorder" type="Sprite" parent="."]
 position = Vector2( 0, -400 )
 scale = Vector2( 1.01, 1.01 )
-texture = ExtResource( 5 )
+texture = ExtResource( 6 )
 
 [node name="BottomBorder" type="Sprite" parent="."]
 position = Vector2( 0, 400 )
 scale = Vector2( 1.01, 1.01 )
-texture = ExtResource( 5 )
+texture = ExtResource( 6 )
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 anims/transition1 = SubResource( 1 )
 anims/transition2 = SubResource( 2 )
 anims/transition3 = SubResource( 3 )
 anims/transition4 = SubResource( 4 )
-script = ExtResource( 6 )
+script = ExtResource( 7 )
 
-[node name="DialogBox" parent="." instance=ExtResource( 7 )]
+[node name="DialogBox" parent="." instance=ExtResource( 8 )]
 modulate = Color( 1, 1, 1, 0 )
 custom_fonts/mono_font = SubResource( 5 )
 custom_colors/default_color = Color( 0.384314, 0.25098, 0.176471, 1 )
@@ -392,22 +426,33 @@ visible_characters = 0
 percent_visible = 0.0
 
 [node name="GameScreen" type="Node2D" parent="."]
-script = ExtResource( 9 )
+script = ExtResource( 10 )
 
-[node name="Grid" parent="GameScreen" instance=ExtResource( 10 )]
+[node name="Node2D" type="Node2D" parent="GameScreen"]
+
+[node name="BackgroundAnimation" type="AnimatedSprite" parent="GameScreen/Node2D"]
+modulate = Color( 1, 1, 1, 0.411765 )
+frames = SubResource( 6 )
+script = ExtResource( 34 )
+
+[node name="Grid" parent="GameScreen" instance=ExtResource( 35 )]
 height = 5
 width = 5
 
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="GameScreen"]
-script = ExtResource( 11 )
-regular = ExtResource( 12 )
-success = ExtResource( 13 )
+script = ExtResource( 36 )
+regular = ExtResource( 37 )
+success = ExtResource( 38 )
 
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
-stream = ExtResource( 14 )
+stream = ExtResource( 39 )
 autoplay = true
+
+[node name="Lights" type="Node2D" parent="."]
 [connection signal="moved" from="FocusPoint" to="." method="_on_FocusPoint_moved"]
 [connection signal="animation_finished" from="AnimationPlayer" to="." method="_on_AnimationPlayer_animation_finished"]
+[connection signal="animation_finished" from="GameScreen/Node2D/BackgroundAnimation" to="GameScreen/Node2D/BackgroundAnimation" method="_on_BackgroundAnimation_animation_finished"]
 [connection signal="cascade_finished" from="GameScreen/Grid" to="." method="_on_Grid_cascade_finished"]
 [connection signal="matched" from="GameScreen/Grid" to="GameScreen/AudioStreamPlayer" method="_on_Grid_matched"]
+[connection signal="matched" from="GameScreen/Grid" to="GameScreen/Node2D/BackgroundAnimation" method="_on_Grid_matched"]
 [connection signal="matched" from="GameScreen/Grid" to="." method="_on_Grid_matched"]
