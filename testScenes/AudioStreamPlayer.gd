@@ -15,10 +15,10 @@ func play_success():
 	play()
 
 func _on_Grid_matched(match_info) -> void:
-	if match_info.count == 1:
-		play_match()
-	elif match_info.has_type(match_info.Types.Gear):
+	if match_info.has_type(match_info.Types.Gear):
 		play_success()
+	else:
+		play_match()
 
 
 func _on_Grid_no_moves_left() -> void:
