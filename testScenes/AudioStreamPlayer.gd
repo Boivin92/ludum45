@@ -17,7 +17,7 @@ func play_success():
 func _on_Grid_matched(match_info) -> void:
 	if match_info.count == 1:
 		play_match()
-	else:
+	elif match_info.has_type(match_info.Types.Gear):
 		play_success()
 
 
