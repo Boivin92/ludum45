@@ -5,6 +5,7 @@ export(int, 3, 12) var width := 3
 
 signal matched(match_info)
 signal level_completed
+signal cascade_finished
 
 const Gem = preload("res://Grid/Gem/Gem.tscn")
 enum Matches { Horizontal = 1, Vertical = 2}
@@ -71,6 +72,8 @@ func match_gems(match_info: MatchInfo) -> void:
 		update_grid_contents(match_info)
 	else:
 		# Has to be here because of all the yield()-ing
+		if not silent:
+			emit_signal("cascade_finished")
 		silent = false
 
 
